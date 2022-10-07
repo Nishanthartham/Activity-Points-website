@@ -1,28 +1,55 @@
 import express from "express";
 import { User } from "../models/userSchema.js";
+import bcrypt from "bcryptjs";
+import jwt, { decode } from "jsonwebtoken";
 
 export const registerUser = async (req, res) => {
   // console.log(req.body)
   try {
     console.log("Creating user");
-    // const pass = await bcrypt.hash(req.body.password, 10); //Asynchronously generates a hash for the given string.
-    console.log("Creating user1");
-    
+    const pass = await bcrypt.hash(req.body.password, 10); //Asynchronously generates a hash for the given string.
     const user = await User.create({
       name: req.body.name,
-      rollno: req.body.rollNo,
-      password: req.body.password,
+      rollNo: req.body.rollNo,
+      password: pass,
     });
-    user.save()
-    console.log("Creating user");
-
-    // res.sendStatus(200)
-    res.json({ status: "ok" });
+    const user_data = await user.save();
+    res.status(200).json(user_data);
+    console.log("user created");
   } catch (error) {
-    // user.save();
-    // res.sendStatus(401);
-    // res.json(error);
-    res.json({ status: "error", error: "Duplicate email" });
+    res.status(401).json("duplicate roll NO");
+  }
+};
+export const findUser = async (req, res) => {
+  // console.log(req.body)
+  try {
+    console.log("Finding user");
+    const user_data = await User.findOne({ rollNo: req.body.rollNo });
+    console.log(user_data);
+    if (user_data === null) {
+      res.status(401).json("User is not present");
+      return;
+    }
+    // const pass = req.body.password === user_data.password;
+    const pass = bcrypt.compare(req.body.password, user_data.password);
+
+    if (pass) {
+      // const token = jwt.sign(
+      //   { name: user.name, userName: user.username },
+      //   "Praumasnsuni#5"
+      // );
+      const token = jwt.sign(
+        { name: user_data.name, rollno: user_data.rollNo },
+        "Praumasnsuni#5"
+      );
+      res.status(200).json(user_data);
+      console.log("user found");
+    } else {
+      res.status(401).json("Password incorrect");
+      return;
+    }
+  } catch (error) {
+    res.status(404).json(error);
   }
 };
 

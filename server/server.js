@@ -12,7 +12,8 @@ app.use(express.json()); //parses anything which is incoming to json IMPPPPPP
 //   // "mongodb+srv://Nishanth:Nishanth@cluster0.5n3do.mongodb.net/user-db"
 //   "mongodb://localhost:27017/activityPoints"
 // );
-app.use("/login", loginRouter);
+
+app.use("/", loginRouter);
 
 const PORT = process.env.PORT || 5000;
 const url = "mongodb://localhost:27017/ActivityPoints";

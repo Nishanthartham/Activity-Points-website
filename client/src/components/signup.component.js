@@ -28,6 +28,14 @@ export default class SignUp extends Component {
             placeholder="Enter your roll number"
           />
         </div>
+        <div className='mb-3'>
+          <label>Designation</label>
+          <br></br>
+          <select>
+        <option value="Staff">Staff</option>
+        <option value="Student">Student</option>
+      </select>
+        </div>
 
         <div className="mb-3">
           <label>Password</label>

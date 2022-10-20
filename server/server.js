@@ -8,10 +8,6 @@ app.use(cors());
 app.use(express.json()); //parses anything which is incoming to json IMPPPPPP
 // const url = 'http://localhost:5000'
 
-// mongoose.connect(
-//   // "mongodb+srv://Nishanth:Nishanth@cluster0.5n3do.mongodb.net/user-db"
-//   "mongodb://localhost:27017/activityPoints"
-// );
 
 app.use("/", loginRouter);
 
@@ -20,9 +16,13 @@ const url = "mongodb://localhost:27017/ActivityPoints";
 app.listen(PORT, () => {
   console.log(`App is running at ${PORT} port`);
 });
-mongoose.connect(url, () => {
-  console.log("Database connected");
-});
+mongoose.connect(
+  "mongodb+srv://main-user-42:main-user-42@cluster0.k9k0a.mongodb.net/ActivityPoints",()=>{console.log("database connected");}
+);
+// mongoose.connect(url, () => {
+//   console.log("Database connected");
+// });
+
 // .then (()=>app.listen((PORT),()=>console.log(`App is running at ${PORT} port`)))
 // .catch((err)=>console.log(err.message))
 console.log("connection successfull");

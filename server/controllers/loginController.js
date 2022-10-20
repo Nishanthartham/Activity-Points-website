@@ -20,6 +20,9 @@ export const registerUser = async (req, res) => {
     res.status(401).json("duplicate roll NO");
   }
 };
+
+// <---------->
+
 export const findUser = async (req, res) => {
   // console.log(req.body)
   try {

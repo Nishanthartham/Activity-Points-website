@@ -1,50 +1,41 @@
-import React from 'react'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+// import Header from "./components/Header";
+// import Blogs from "./components/Blogs";
+// import UserBlogs from "./components/UserBlogs";
+// import BlogDetail from "./components/BlogDetail";
+// import AddBlog from "./components/AddBlog";
 
-import Login from './components/login.component'
-import SignUp from './components/signup.component'
-import Landing from './Landing'
-
+import React, { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import Auth from "./components/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "./store";
+import Landing from './components/Landing'
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-          <div className="container">
-            <Link className="navbar-brand" to={'/sign-in'}>
-              Activity Tracker
-            </Link>
-            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to={'/sign-in'}>
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to={'/sign-up'}>
-                    Sign up
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+  const dispath = useDispatch();
 
-        <div className="auth-wrapper">
-          <div className="auth-inner">
-            <Routes>
-              <Route exact path="/" element={<Landing />} />
-              <Route path="/sign-in" element={<Login />} />
-              <Route path="/sign-up" element={<SignUp />} />
-            </Routes>
-          </div>
-        </div>
-      </div>
-    </Router>
-  )
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  console.log(isLoggedIn);
+  useEffect(() => {
+    if (localStorage.getItem("userId")) {
+      dispath(authActions.login());
+    }
+  }, [dispath]);
+  return (
+    <React.Fragment>
+      <header>
+        {/* <Header /> */}
+      </header>
+      <main>
+        <Routes>
+          {!isLoggedIn ? (
+            <Route path="/auth" element={<Auth />} />
+          ) : (
+            <Landing/>
+          )}
+        </Routes>
+      </main>
+    </React.Fragment>
+  );
 }
 
-export default App
+export default App;

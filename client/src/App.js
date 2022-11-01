@@ -1,37 +1,24 @@
-// import Header from "./components/Header";
-// import Blogs from "./components/Blogs";
-// import UserBlogs from "./components/UserBlogs";
-// import BlogDetail from "./components/BlogDetail";
-// import AddBlog from "./components/AddBlog";
-
-import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import Auth from "./components/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "./store";
-import Landing from './components/Landing'
+import React from "react";
+import Header from "./components/Header";
+// import LoginForm from "./components/Login";
+import { Routes, Route } from "react-router-dom";
+// import Auth from "./components/Auth";
+import Login from "./components/Login";
+import SignUp from "./components/Signup";
+import { useSelector } from "react-redux";
 function App() {
-  const dispath = useDispatch();
-
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  console.log(isLoggedIn);
-  useEffect(() => {
-    if (localStorage.getItem("userId")) {
-      dispath(authActions.login());
-    }
-  }, [dispath]);
+  const isSignup = useSelector((state) => state.isSignup);
+  console.log(isSignup);
   return (
     <React.Fragment>
       <header>
-        {/* <Header /> */}
+        <Header />
       </header>
       <main>
         <Routes>
-          {!isLoggedIn ? (
-            <Route path="/auth" element={<Auth />} />
-          ) : (
-            <Landing/>
-          )}
+          {/* <Route path="/auth" element={<Auth />} /> */}
+          {isSignup && <Route path="/auth" element={<SignUp />} />}
+          {!isSignup && <Route path="/auth" element={<Login />} />}
         </Routes>
       </main>
     </React.Fragment>

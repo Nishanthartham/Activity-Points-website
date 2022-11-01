@@ -1,117 +1,172 @@
-import React, { Component,useState } from 'react'
-import axios from "axios";
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store";
+import { authActions } from "../store/index";
 import { useNavigate } from "react-router-dom";
-import '../index.css'
-function Signup({isSignup,setIsSignup}) {
+import axios from "axios";
 
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+const theme = createTheme();
+
+export default function SignUp() {
+  // const isSignup = useSelector((state) => state.isSignup);
   const navigate = useNavigate();
   const dispath = useDispatch();
-  const [inputs, setInputs] = useState({
-    name: "",
-    rollNo: "",
-    password: "",
-  });
-  const handleChange = (e) => {
-    setInputs((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-    console.log(inputs);
+  const signin = () => {
+    dispath(authActions.signin());
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputs);
-    console.log("dklfs");
-    if (isSignup) { 
-      sendRequest("register")
-        .then((data) => localStorage.setItem("userId", data.user._id))
-        .then(() => dispath(authActions.login()))
-        .then(() => navigate("/"));
-    } else {
-      sendRequest()
-        .then((data) => localStorage.setItem("userId", data.user._id))
-        .then(() => dispath(authActions.login()))
-        .then(() => navigate("/"));
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    sendRequest(data)
+      .then((data) => localStorage.setItem("userId", data))
+      .then(() => dispath(authActions.login()))
+      .then(() => navigate("/dashboard"));
+
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
   };
-  const sendRequest = async (type = "register") => {
-    console.log(type);
-    //   .post(`http://localhost:5000/api/user/${type}`,
+  const sendRequest = async (data) => {
     const res = await axios
-      .post(`http://localhost:5000/${type}`,
-       {
-        name: inputs.name,
-        rollNo: inputs.rollNo,
-        password: inputs.password,
+      .post(`http://localhost:5000/register`, {
+        name: data.get("firstName"),
+        rollNo: data.get("rollNo"),
+        password: data.get("password"),
       })
       .catch((err) => console.log(err));
 
-    const data = await res.data;
-    console.log(data);
-    // console.log("data");
-    return data;
+    const res_data = await res.res_data;
+    console.log(res_data);
+    return res_data;
   };
+
   return (
-    <form>
-        <h3>Sign Up</h3>
-
-        <div className="mb-3">
-          <label>First name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="First name"
-            name='name'
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Last name</label>
-          <input type="text" className="form-control" placeholder="Last name" 
-          name='name'
-            onChange={handleChange}
-            />
-        </div>
-
-        <div className="mb-3">
-          <label>Roll No</label>
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Enter your roll number"
-            name='rollNo'
-            onChange={handleChange}
-
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-            name='password'
-            onChange={handleChange}
-
-          />
-        </div>
-
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary" onSubmit={()=>handleSubmit}>
-            Sign Up
-          </button>
-        </div>
-
-        <p className="forgot-password text-right">
-          Already registered <a href="/sign-in">sign in?</a>
-        </p>
-      </form>
-
-  )
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Roll NO"
+                  name="rollNo"
+                  autoComplete="rollno"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              {/* <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+                />
+              </Grid> */}
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2" onClick={signin}>
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 5 }} />
+      </Container>
+    </ThemeProvider>
+  );
 }
-
-export default Signup

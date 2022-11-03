@@ -49,12 +49,14 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     sendRequest(data)
-      .then((data) => localStorage.setItem("userId", data))
+    .then((res_data)=>console.log("sdfsdf"+ res_data.data.rollNo))
+      .then((res_data) => localStorage.setItem('userId', JSON.stringify(res_data.data.rollNo)))
       .then(() => dispath(authActions.login()))
-      .then(() => navigate("/dashboard"));
+      .then(() => navigate("/dashboard"))
+      .then(() => console.log("ygjhj"+JSON.parse(localStorage.getItem('userId'))))
 
     console.log({
-      email: data.get("email"),
+      rollNo: data.get("rollNo"),
       password: data.get("password"),
     });
   };
@@ -67,8 +69,8 @@ export default function SignUp() {
       })
       .catch((err) => console.log(err));
 
-    const res_data = await res.res_data;
-    console.log(res_data);
+    const res_data = await res;
+    console.log(res_data.data);
     return res_data;
   };
 

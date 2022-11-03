@@ -7,8 +7,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import FaceIcon from '@mui/icons-material/Face';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -17,7 +19,8 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../store/index";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+//#8b181b red
+//green rgb(56,85,41)
 function Copyright(props) {
   return (
     <Typography
@@ -74,20 +77,38 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: "url(cbit.jpg)",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
-            marginTop: 8,
+            my: 8,
+            mx: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: "rgb(56,85,41)" , height: 50, width: 50}}>
+            <FaceIcon sx ={{fontSize: 50}}/>
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h4">
             Sign up
           </Typography>
           <Box
@@ -99,6 +120,8 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                inputProps={{style: {fontSize: 17}}} // font size of input text
+                InputLabelProps={{style: {fontSize: 13}}}
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -110,6 +133,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                inputProps={{style: {fontSize: 17}}} // font size of input text
+                InputLabelProps={{style: {fontSize: 13}}}
                   required
                   fullWidth
                   id="lastName"
@@ -120,6 +145,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                inputProps={{style: {fontSize: 17}}} // font size of input text
+                InputLabelProps={{style: {fontSize: 13}}}
                   required
                   fullWidth
                   id="email"
@@ -130,6 +157,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                inputProps={{style: {fontSize: 17}}} // font size of input text
+                InputLabelProps={{style: {fontSize: 13}}}
                   required
                   fullWidth
                   name="password"
@@ -153,20 +182,22 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              style={{"background-color":"#8b181b"}}
             >
-              Sign Up
+              <h5>Sign Up</h5>
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2" onClick={signin}>
-                  Already have an account? Sign in
+                  <h6>Already have an account? Sign in</h6>
                 </Link>
               </Grid>
             </Grid>
+            <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
+        </Grid>
+      </Grid>
     </ThemeProvider>
   );
 }

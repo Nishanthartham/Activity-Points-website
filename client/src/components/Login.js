@@ -9,6 +9,7 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import FaceIcon from '@mui/icons-material/Face';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -78,7 +79,7 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(college.jpeg)",
+            backgroundImage: "url(cbit.jpg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -98,10 +99,10 @@ export default function Login() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
+            <Avatar sx={{ m: 1, bgcolor: "rgb(56,85,41)", height: 50, width: 50 }}>
+            <FaceIcon sx ={{fontSize: 50}}/>
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h4">
               Sign in
             </Typography>
             <Box
@@ -111,6 +112,8 @@ export default function Login() {
               sx={{ mt: 1 }}
             >
               <TextField
+              inputProps={{style: {fontSize: 17}}} // font size of input text
+              InputLabelProps={{style: {fontSize: 13}}} // font size of input label
                 margin="normal"
                 required
                 fullWidth
@@ -122,6 +125,8 @@ export default function Login() {
                 autoFocus
               />
               <TextField
+              inputProps={{style: {fontSize: 17}}} // font size of input text
+              InputLabelProps={{style: {fontSize: 13}}}
                 margin="normal"
                 required
                 fullWidth
@@ -136,12 +141,14 @@ export default function Login() {
                 label="Remember me"
               />
               <Button
+              
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                style={{"background-color":"#8b181b"}}
               >
-                Sign In
+                <h5>Sign In</h5>
               </Button>
               <Grid container>
                 {/* <Grid item xs> forgot password
@@ -151,7 +158,7 @@ export default function Login() {
                 </Grid> */}
                 <Grid item>
                   <Link href="#" variant="body2" onClick={signup}>
-                    {"Don't have an account? Sign Up"}
+                    <h6>{"Don't have an account? Sign Up"}</h6>
                   </Link>
                 </Grid>
               </Grid>

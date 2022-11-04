@@ -26,6 +26,12 @@ const Header = () => {
     dispatch(authActions.signup());
     navigate("/auth");
   };
+  const logout = () => {
+    localStorage.removeItem("userId");
+    dispatch(authActions.logout());
+    dispatch(authActions.signin());
+    navigate("/auth");
+  };
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   return (
     <AppBar
@@ -47,7 +53,7 @@ const Header = () => {
             <>
               <Button
                 variant="text"
-                style={{ color: "rgb(161,107,21)", fontSize: "16px" }}
+                style={{ color: "#ffffff", fontSize: "16px" }}
                 sx={{ margin: 1, borderRadius: 15 }}
                 onClick={signup}
               >
@@ -55,7 +61,7 @@ const Header = () => {
               </Button>
               <Button
                 variant="text"
-                style={{ color: "rgb(161,107,21)", fontSize: "16px" }}
+                style={{ color: "#ffffff", fontSize: "16px" }}
                 sx={{ margin: 1, borderRadius: 15 }}
                 onClick={signin}
               >
@@ -66,8 +72,9 @@ const Header = () => {
           {isLoggedIn && (
             <Button
               variant="text"
-              style={{ color: "rgb(161,107,21)", fontSize: "16px" }}
+              style={{ color: "#ffffff", fontSize: "16px" }}
               sx={{ margin: 1, borderRadius: 15 }}
+              onClick={logout}
             >
               Logout
             </Button>

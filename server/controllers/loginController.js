@@ -17,7 +17,8 @@ export const registerUser = async (req, res) => {
     res.status(200).json(user_data);
     console.log("user created");
   } catch (error) {
-    res.status(401).json("duplicate roll NO");
+    res.status(401).json({ message: "duplicate roll NO" });
+    return;
   }
 };
 
@@ -30,7 +31,7 @@ export const findUser = async (req, res) => {
     const user_data = await User.findOne({ rollNo: req.body.rollNo });
     console.log(user_data);
     if (user_data === null) {
-      res.status(401).json("User is not present");
+      res.status(401).json({ message: "User is not present" });
       return;
     }
     // const pass = req.body.password === user_data.password;
@@ -48,7 +49,7 @@ export const findUser = async (req, res) => {
       res.status(200).json(user_data);
       console.log("user found");
     } else {
-      res.status(401).json("Password incorrect");
+      res.status(401).json({ message: "Password incorrect" });
       return;
     }
   } catch (error) {

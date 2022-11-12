@@ -32,7 +32,8 @@ export const findUser = async (req, res) => {
     console.log(user_data);
     if (user_data === null) {
       res.status(401).json({ message: "User is not present" });
-      return;
+      res.end();
+      // return
     }
     // const pass = req.body.password === user_data.password;
     const pass = bcrypt.compare(req.body.password, user_data.password);

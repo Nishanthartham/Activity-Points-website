@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-// import { User } from "./models/userSchema.js";
 import loginRouter from "./routes/loginRouter.js";
+import certificateRouter from "./routes/certificateRouter.js";
 import mongoose from "mongoose";
 const app = express();
 app.use(cors());
@@ -9,6 +9,7 @@ app.use(express.json()); //parses anything which is incoming to json IMPPPPPP
 // const url = 'http://localhost:5000'
 
 app.use("/", loginRouter);
+app.use("/addCertificate", certificateRouter);
 
 const PORT = process.env.PORT || 5000;
 const url = "mongodb://localhost:27017/ActivityPoints";

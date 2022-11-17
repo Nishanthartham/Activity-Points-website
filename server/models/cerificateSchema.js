@@ -11,7 +11,7 @@ const certificateSchema = new mongoose.Schema({
 });
 
 export const Certificates = mongoose.model("Certificates", certificateSchema);
-// Map { 'github' => 'vkarpov15', 'twitter' => '@code_barbarian' }
+// Map { 'hackathon' => ['vkarpov15'], 'twitter' => ['@code_barbarian'],username }
 //   console.log(new User({
 //     socialMediaHandles: {
 //       github: 'vkarpov15',

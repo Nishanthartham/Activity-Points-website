@@ -9,7 +9,8 @@ app.use(express.json()); //parses anything which is incoming to json IMPPPPPP
 // const url = 'http://localhost:5000'
 
 app.use("/", loginRouter);
-app.use("/addCertificate", certificateRouter);
+console.log("app.js");
+app.use("/Certificate", certificateRouter);
 
 const PORT = process.env.PORT || 5000;
 const url = "mongodb://localhost:27017/ActivityPoints";

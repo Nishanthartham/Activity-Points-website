@@ -1,0 +1,31 @@
+.child{
+    width: 33%;
+    height: 33vh;
+    box-shadow: 1px 2px 3px #ccc;
+    border-radius: 7px;
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
+    font-weight: bold;
+    cursor: pointer;
+}
+.child:hover{
+    background-color: #2A303A;
+    color: #3f51b5;
+}
+.parent{
+margin: 20px;
+
+}
+.level1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.level2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

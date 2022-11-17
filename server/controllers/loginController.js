@@ -29,6 +29,7 @@ export const findUser = async (req, res) => {
   try {
     console.log("Finding user");
     const user_data = await User.findOne({ rollNo: req.body.rollNo });
+    console.log("Finding user12");
     console.log(user_data);
     if (user_data === null) {
       res.status(401).json({ message: "User is not present" });
@@ -48,6 +49,7 @@ export const findUser = async (req, res) => {
         "Praumasnsuni#5"
       );
       res.status(200).json(user_data);
+      console.log(user_data);
       console.log("user found");
     } else {
       res.status(401).json({ message: "Password incorrect" });

@@ -1,6 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { Store } from "redux";
-
+// const user = JSON.parse(localStorage.getItem("user"));
+// if (!user) user = false;
 const authSlice = createSlice({
   name: "auth",
   initialState: { isLoggedIn: false, isSignup: true },

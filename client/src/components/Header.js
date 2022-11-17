@@ -49,6 +49,26 @@ const Header = () => {
           APT
         </Typography>
         <Box display="flex" marginLeft={"auto"}>
+          {isLoggedIn && (
+            <>
+              <Button
+                variant="text"
+                style={{ color: "#ffffff", fontSize: "16px" }}
+                sx={{ margin: 1, borderRadius: 15 }}
+                // onClick={navigate("/viewtypes")}
+              >
+                View
+              </Button>
+              <Button
+                variant="text"
+                style={{ color: "#ffffff", fontSize: "16px" }}
+                sx={{ margin: 1, borderRadius: 15 }}
+                // onClick={navigate("/uploadtypes")}
+              >
+                Upload
+              </Button>
+            </>
+          )}
           {!isLoggedIn && (
             <>
               <Button

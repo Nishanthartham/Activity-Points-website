@@ -47,6 +47,25 @@ export const addHackathon = async (req, res) => {
     return;
   }
 };
+export const getHackathon = async (req, res) => {
+  try {
+    console.log("Getting certifcate");
+    let present = await Hackathon.findOne({ username: username });
+    console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      const certificate_data = await Hackathon.findOne({ username: username });
+      res.status(200).json(certificate_data);
+    } else {
+      console.log("certificate not found");
+      res.status(401).json({ message: "No user found" });
+      console.log(" User has no hackathon certificates ");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
 
 export const addInternship = async (req, res) => {
   try {

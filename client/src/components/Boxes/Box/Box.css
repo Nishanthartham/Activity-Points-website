@@ -1,0 +1,21 @@
+.box{
+    display: grid;
+    gap: 50px 100px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.goToDetails{
+    height: 90vh;
+    background-color: orange;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-around;
+}
+.certi-image {
+    width: 97%;
+    height: 80vh;
+}

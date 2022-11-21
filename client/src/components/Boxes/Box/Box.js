@@ -17,6 +17,7 @@ function Box(props) {
   useEffect(() => {
     setImg(props.name);
   }, [props.name]);
+
   return (
     <div className="col-md-4" style={{ marginBottom: "20px" }}>
       <div className="wrap">

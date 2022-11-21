@@ -5,9 +5,20 @@ import certificateRouter from "./routes/certificateRouter.js";
 import mongoose from "mongoose";
 const app = express();
 app.use(cors());
-app.use(express.json()); //parses anything which is incoming to json IMPPPPPP
+// app.use(express.json()); //parses anything which is incoming to json IMPPPPPP
 // const url = 'http://localhost:5000'
-
+app.use((req, res, next) => {
+  express.json({
+    limit: "50mb",
+    extended: true,
+  })(req, res, (err) => {
+    if (err) {
+      console.error(err);
+      return res.sendStatus(400); // Bad request
+    }
+    next();
+  });
+});
 app.use("/", loginRouter);
 console.log("app.js");
 app.use("/Certificate", certificateRouter);

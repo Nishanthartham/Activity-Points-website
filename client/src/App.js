@@ -6,12 +6,15 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import { useSelector } from "react-redux";
-import Views from "./components/Elements/Views";
+import ViewHackathon from "./components/Elements/ViewHackathon";
 import ViewCertificate from "./components/ViewCertificate";
-
 import Dashboard from "./components/Dashboard";
-import Hackathon from "./components/UploadCertificates/Hackathon";
 import UploadCertificate from "./components/UploadCertificate";
+import UploadHackathon from "./components/UploadCertificates/UploadHackathon";
+import UploadInternship from "./components/UploadCertificates/UploadInternship";
+import ViewInternship from "./components/Elements/ViewInternship";
+import ViewEightWeek from "./components/Elements/ViewEightWeek";
+import UploadEightWeek from "./components/UploadCertificates/UploadEightWeek";
 
 function App() {
   const isSignup = useSelector((state) => state.isSignup);
@@ -27,11 +30,20 @@ function App() {
         <Routes>
           {isSignup && <Route path="/auth" exact element={<SignUp />} />}
           {!isSignup && <Route path="/auth" exact element={<Login />} />}
-          <Route path="/views" element={<Views />} />
+
+          <Route path="/viewhackathon" element={<ViewHackathon />} />
+          <Route path="/viewinternship" element={<ViewInternship />} />
+          <Route path="/vieweightweek" element={<ViewEightWeek />} />
+
           <Route path="/viewtypes" element={<ViewCertificate />} />
           <Route path="/uploadtypes" element={<UploadCertificate />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/upload" element={<Hackathon />} />
+
+          <Route path="/uploadhackathon" element={<UploadHackathon />} />
+          <Route path="/uploadinternship" element={<UploadInternship />} />
+          <Route path="/uploadeightweek" element={<UploadEightWeek />} />
+
+          {/* <Route path="/internship" element={<Internship />} /> */}
         </Routes>
       </main>
     </React.Fragment>

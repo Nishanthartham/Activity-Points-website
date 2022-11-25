@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function ViewHackathon() {
   const [loading, setLoading] = useState(false);
-  const [subjects, setSubjects] = useState([]);
+  const [subjects, setSubjects] = useState({ username: null, name: [] });
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
@@ -26,11 +26,14 @@ function ViewHackathon() {
     setLoading(true);
     try {
       const subjects = await axios.get(
-        "http://localhost:5000/Certificate/hackathon/"
+        "http://localhost:5000/Certificate/hackathon"
       );
       console.log("Subjects -> getSubjects -> subjects", subjects);
       console.log(subjects.data);
-      setSubjects(subjects.data);
+      setSubjects({
+        username: subjects.data.username,
+        name: subjects.data.name,
+      });
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -38,12 +41,12 @@ function ViewHackathon() {
     }
   };
 
-  console.log(subjects);
   return (
     <>
+      {console.log("from view" + subjects.name)}
       <Fragment>
         <Boxes
-          items={subjects}
+          items={subjects.name}
           loading={loading}
           logo="School"
           thisCategory="Subjects"

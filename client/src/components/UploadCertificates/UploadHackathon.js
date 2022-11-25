@@ -12,7 +12,7 @@ function Hackathon() {
   const [Data, setData] = useState({
     // username: localStorage.getItem("userId"),
     username: "fsd",
-    selectedFile: [""],
+    selectedFile: "",
   });
   // console.log("hack upload data " + Data.selectedFile);
   const handleSubmit = (event) => {
@@ -48,13 +48,13 @@ function Hackathon() {
       <div>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <FileBase
-            type="file"
+            type="image/png"
             multiple={false}
             onDone={({ base64 }) => {
               console.log("kjhg");
               setData({
                 ...Data,
-                selectedFile: [...Data.selectedFile, base64],
+                selectedFile: base64,
               });
             }}
           />

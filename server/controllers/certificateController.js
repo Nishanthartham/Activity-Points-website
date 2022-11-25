@@ -8,7 +8,7 @@ import jwt, { decode } from "jsonwebtoken";
 
 const username = "fsd"; //fetch from localstorage
 // const username = localStorage.getItem("userId");
-
+console.log(username);
 export const addHackathon = async (req, res) => {
   try {
     console.log("Adding certificate");
@@ -92,9 +92,10 @@ export const addInternship = async (req, res) => {
   try {
     console.log("Adding Internship certificate");
     let present = await Internship.findOne({ username: username });
-    console.log("asdfa" + present);
+    // console.log("asdfa" + present);
     if (present) {
       console.log("found");
+      const intern_data = present.name;
 
       const certificate = await Internship.updateOne(
         {
@@ -103,7 +104,7 @@ export const addInternship = async (req, res) => {
         {
           $set: {
             username: username,
-            name: [...present.name, req.body.name],
+            name: [...intern_data, req.body.name],
           },
         },
         { new: true }

@@ -3,9 +3,9 @@ import axios from "axios";
 import Boxes from "../Boxes/Boxes";
 import { useNavigate } from "react-router-dom";
 
-function Views() {
+function ViewInternship() {
   const [loading, setLoading] = useState(false);
-  const [subjects, setSubjects] = useState([]);
+  const [subjects, setSubjects] = useState({ username: null, name: [] });
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
@@ -30,7 +30,10 @@ function Views() {
       );
       console.log("Subjects -> getSubjects -> subjects", subjects);
       console.log(subjects.data);
-      setSubjects(subjects.data);
+      setSubjects({
+        username: subjects.data.username,
+        name: subjects.data.name,
+      });
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -38,12 +41,12 @@ function Views() {
     }
   };
 
-  console.log(subjects);
   return (
     <>
+      {console.log("from view" + subjects.name)}
       <Fragment>
         <Boxes
-          items={subjects}
+          items={subjects.name}
           loading={loading}
           logo="School"
           thisCategory="Subjects"
@@ -54,4 +57,4 @@ function Views() {
   );
 }
 
-export default Views;
+export default ViewInternship;

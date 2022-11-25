@@ -32,7 +32,7 @@ function UploadInternship() {
   };
   const sendRequest = async (Data) => {
     const res = await axios
-      .post(`http://localhost:5000/Certificate/internship`, {
+      .post("http://localhost:5000/Certificate/internship", {
         username: Data.username,
         name: Data.selectedFile,
       })

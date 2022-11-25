@@ -19,30 +19,33 @@ function Box(props) {
   }, [props.name]);
 
   return (
-    <div className="col-md-4" style={{ marginBottom: "20px" }}>
-      <div className="wrap">
-        {/* invoking parent function call through props  */}
-        <div className="box">
-          {/* <div className="box" onClick={props.goToDetails}> */}
-          <div className="goToDetails">
-            <div className="centerIt">
-              {props.logo === "School" ? <School /> : <Class />}
-            </div>
-            {/* <div>{props.name}</div> */}
-            {/* <img src={props.name} /> */}
+    <>
+      {img !== null && (
+        <div className="col-md-4" style={{ marginBottom: "20px" }}>
+          <div className="wrap">
+            {/* invoking parent function call through props  */}
+            <div className="box">
+              {/* <div className="box" onClick={props.goToDetails}> */}
+              <div className="goToDetails">
+                <div className="centerIt">
+                  {props.logo === "School" ? <School /> : <Class />}
+                </div>
+                {/* <div>{props.name}</div> */}
+                {/* <img src={props.name} /> */}
 
-            {/* <Card>
+                {/* <Card>
               <CardMedia image={props.name} />
             </Card> */}
 
-            <img
-              src={"data:image/png;base64," + img}
-              alt="Image"
-              className="certi-image"
-            />
-            {/* <a href={"data:image/png;base64," + img}>hack link</a> */}
-          </div>
-          {/* <div className="options">
+                <img
+                  // src={"data:image/png;base64," + img}
+                  src={img}
+                  alt="Image"
+                  className="certi-image"
+                />
+                {/* <a href={"data:image/png;base64," + img}>hack link</a> */}
+              </div>
+              {/* <div className="options">
             <div>
               {" "}
               <IconButton
@@ -71,9 +74,11 @@ function Box(props) {
               </IconButton>
             </div>
           </div> */}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

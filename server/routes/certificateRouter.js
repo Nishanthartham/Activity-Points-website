@@ -22,7 +22,7 @@ router.post("/add8cred", addCertificate);
 console.log("Inside router");
 
 router.post("/hackathon", addHackathon);
-router.get("/hackathon", getHackathon);
+router.get("/hackathon/:id", getHackathon);
 
 router.post("/internship", addInternship);
 router.get("/internship", getInternship);

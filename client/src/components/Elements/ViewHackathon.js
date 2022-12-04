@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function ViewHackathon() {
   const [loading, setLoading] = useState(false);
   const [subjects, setSubjects] = useState({ username: null, name: [] });
+  const [userId,setUserId] = useState();
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
@@ -13,6 +14,8 @@ function ViewHackathon() {
   useEffect(() => {
     return () => {
       console.log("Inside effect");
+      setUserId(localStorage.getItem("userId"))
+      console.log("Inside effect2 "+userId);
       getSubjects();
       console.log("Inside effect2");
     };
@@ -26,7 +29,7 @@ function ViewHackathon() {
     setLoading(true);
     try {
       const subjects = await axios.get(
-        "http://localhost:5000/Certificate/hackathon"
+        `http://localhost:5000/Certificate/hackathon/${userId}`
       );
       console.log("Subjects -> getSubjects -> subjects", subjects);
       console.log(subjects.data);

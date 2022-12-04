@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"; 
 import { Hackathon } from "../models/hackathonSchema.js";
 import { Internship } from "../models/hackathonSchema.js";
 import { course_eight } from "../models/hackathonSchema.js";
@@ -12,7 +12,7 @@ console.log(username);
 export const addHackathon = async (req, res) => {
   try {
     console.log("Adding certificate");
-    let present = await Hackathon.findOne({ username: username });
+    let present = await Hackathon.findOne({ username: req.params.id });
     // console.log("asdfa" + present);
     if (present) {
       console.log("found");

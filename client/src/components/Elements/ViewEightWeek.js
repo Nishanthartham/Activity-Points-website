@@ -46,7 +46,7 @@ function ViewEightWeek() {
           items={subjects}
           loading={loading}
           logo="School"
-          thisCategory="Subjects"
+          thisCategory="Eight Week Course Certificates"
           // goToDetails={goToDetails}
         />
       </Fragment>

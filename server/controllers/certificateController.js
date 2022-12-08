@@ -1,4 +1,4 @@
-import express from "express"; 
+import express from "express";
 import { Hackathon } from "../models/hackathonSchema.js";
 import { Internship } from "../models/hackathonSchema.js";
 import { course_eight } from "../models/hackathonSchema.js";
@@ -6,20 +6,18 @@ import { course_tweleve } from "../models/hackathonSchema.js";
 import bcrypt from "bcryptjs";
 import jwt, { decode } from "jsonwebtoken";
 
-const username = "fsd"; //fetch from localstorage
+// const username = "fsd"; //fetch from localstorage
 // const username = localStorage.getItem("userId");
-console.log(username);
+// console.log(username);
 export const addHackathon = async (req, res) => {
   try {
+    const username = req.params.id;
     console.log("Adding certificate");
     let present = await Hackathon.findOne({ username: req.params.id });
     // console.log("asdfa" + present);
     if (present) {
       console.log("found");
       const hack_data = present.name;
-      // console.log(...hack_data);
-      // console.log(hack_data + "prev hackathon certificates from backend ");
-      // console.log(req.body.name + " hackathon certificates from backend ");
       const certificate = await Hackathon.updateOne(
         {
           username: username,
@@ -32,20 +30,7 @@ export const addHackathon = async (req, res) => {
         },
         { new: true }
       );
-      // const save_certificate_data = await certificate.save();
-      // const filter = { username: username };
-      // const update = { name: [...hack_data, req.body.file] };
 
-      // `doc` is the document _after_ `update` was applied because of
-      // `new: true`
-      // let doc = await Character.findOneAndUpdate(filter, update, {
-      //   new: true,
-      // });
-      // Hackathon.hackathonData.findOneAndUpdate(
-      //   { username: username },
-      //   { $set: { username: username, name: [...hack_data, req.body.file] } },
-      //   { returnNewDocument: true }
-      // );
       console.log("saved in mongo");
       const certificate_data = await Hackathon.findOne({
         username: username,
@@ -71,11 +56,13 @@ export const addHackathon = async (req, res) => {
 export const getHackathon = async (req, res) => {
   try {
     console.log("Getting certifcate");
-    let present = await Hackathon.findOne({ username: username });
+    let present = await Hackathon.findOne({ username: req.params["id"] });
     console.log("asdfa" + present);
     if (present) {
       console.log("found");
-      const certificate_data = await Hackathon.findOne({ username: username });
+      const certificate_data = await Hackathon.findOne({
+        username: req.params["id"],
+      });
       res.status(200).json(certificate_data);
     } else {
       console.log("certificate not found");

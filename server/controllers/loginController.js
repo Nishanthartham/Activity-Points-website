@@ -44,62 +44,19 @@ export const findUser = async (req, res) => {
       //   { name: user.name, userName: user.username },
       //   "Praumasnsuni#5"
       // );
-      const token = jwt.sign(
+      const accessToken = jwt.sign(
         { name: user_data.name, rollno: user_data.rollNo },
-        "Praumasnsuni#5"
+        // { username: pass },
+        "token"
       );
-      res.status(200).json(user_data);
+      res.status(201).json({ token: accessToken, username: user_data.rollNo });
       console.log(user_data);
       console.log("user found");
     } else {
-      res.status(401).json({ message: "Password incorrect" });
+      res.status(502).json({ message: "roll no or Password incorrect" });
       return;
     }
   } catch (error) {
     res.status(404).json(error);
   }
 };
-
-//   app.post("/login", async (req, res) => {
-//     // console.log(req.body)
-//     // req = {username:"shiva@gmail.com",password:"umapathi"}
-//     const user = await User.findOne({
-//       username: req.body.userName,
-//     });
-//     if (!user) {
-//       return { status: "error", error: "Invalid login" };
-//     }
-//     const pass = bcrypt.compare(req.body.password, user.password);
-
-//     if (pass) {
-//       const token = jwt.sign(
-//         { name: user.name, userName: user.username },
-//         "Praumasnsuni#5"
-//       );
-//       // res.statusMessage("you are authorized welcome onboard:)") for text/html header
-//       // res.sendStatus(200)
-//       // res.status(200).send("you are authorized welcome")
-//       res.json({ status: "ok", user: token }); //for browser response is sent through login.js (data)
-
-//       // return res.json({staus:'ok',user:token})
-//     } else {
-//       // res.status(401).send("Enter correct credentials");
-//       res.json({ status: "error", user: false });
-//       return;
-//     }
-//     // user.save();
-//   });
-//   app.post("/quote", async (req, res) => {
-//     try {
-//       const tok = req.headers["x-access-token"];
-//       const decoded = jwt.verify(tok, "Praumasnsuni#5");
-//       const username = decoded.userName;
-//       const quote = req.body.quote;
-//       // const username = req.body.username;
-//       await User.updateOne({ username: username }, { $set: { quote: quote } });
-//       res.json({ status: "ok" });
-//     } catch (error) {
-//       console.log("This is error", error);
-//       res.json({ status: "error", error: "invalid Token" });
-//     }
-//   });

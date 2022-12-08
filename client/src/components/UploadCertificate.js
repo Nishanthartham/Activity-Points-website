@@ -1,6 +1,12 @@
 import React from "react";
 import "./viewCertificate.css";
-
+const myStyle={
+  backgroundImage: 
+"url('https://i0.wp.com/mrcampbellrocks.com/wp-content/uploads/2022/07/Free-Mac-Folder-Icons-54.png?w=840&ssl=1')",
+  height:'40vh',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+};
 import { useNavigate } from "react-router-dom";
 // import Hackathon from "./UploadCertificates/Hackathon";
 function UploadCertificate() {
@@ -8,22 +14,45 @@ function UploadCertificate() {
   return (
     <>
       <div className="parent">
+      <div className="nav-btns">
+            <center>
+            <button
+            style={{background: "rgb(56,85,41)", color: "white"}}
+              className="btn"
+              onClick={() => {
+                navigate("/dashboard");
+              }}
+            >
+             DASHBOARD
+            </button>
+            <button
+            style={{background: "rgb(56,85,41)", color: "white"}}
+              className="btn"
+              onClick={() => {
+                navigate("/viewTypes");
+              }}
+            >
+              VIEW
+            </button>
+            </center>
+          </div>
         <div className="level1">
-          <div className="child" background-image="Activity-Points-website\client\public\foldericon.png" onClick={() => navigate("/uploadhackathon")}>
+          <div className="child" style={myStyle} onClick={() => navigate("/uploadhackathon")}>
             Hackathon
           </div>
-          <div className="child" onClick={() => navigate("/uploadinternship")}>
+          <div className="child" style={myStyle} onClick={() => navigate("/uploadinternship")}>
             Internships
           </div>
-          <div className="child" onClick={() => navigate("/uploadeightweek")}>
+          <div className="child" style={myStyle} onClick={() => navigate("/uploadeightweek")}>
             8-week courses
           </div>
         </div>
         <div className="level2">
-          <div className="child">12-week courses</div>
-          <div className="child">CR</div>
-          <div className="child">Sports</div>
+          <div className="child" style={myStyle}>12-week courses</div>
+          <div className="child" style={myStyle}>CR</div>
+          <div className="child" style={myStyle}>Sports</div>
         </div>
+
       </div>
     </>
   );

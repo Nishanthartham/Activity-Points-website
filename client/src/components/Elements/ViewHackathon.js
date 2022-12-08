@@ -6,30 +6,39 @@ import { useNavigate } from "react-router-dom";
 function ViewHackathon() {
   const [loading, setLoading] = useState(false);
   const [subjects, setSubjects] = useState({ username: null, name: [] });
-  const [userId,setUserId] = useState();
+  const [userId, setUserId] = useState();
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
   console.log("outside effect");
-  useEffect(() => {
-    return () => {
-      console.log("Inside effect");
-      setUserId(localStorage.getItem("userId"))
-      console.log("Inside effect2 "+userId);
-      getSubjects();
-      console.log("Inside effect2");
-    };
-  }, []);
+  console.log(JSON.parse(localStorage.getItem("userId")));
 
+  useEffect(() => {
+    console.log("Inside effect");
+    // getusername();
+    setUserId(JSON.parse(localStorage.getItem("userId")));
+    console.log("Inside effect2 " + userId);
+    getSubjects();
+    console.log("Inside effect2");
+  }, userId);
+  const getusername = () => {
+    setUserId(JSON.parse(localStorage.getItem("userId")));
+  };
   // const goToDetails = (subjectId) => {
   //   navigate(`/Details/${subjectId}`);
   // };
 
   const getSubjects = async () => {
     setLoading(true);
+    console.log(userId + "async");
     try {
       const subjects = await axios.get(
-        `http://localhost:5000/Certificate/hackathon/${userId}`
+        `http://localhost:5000/Certificate/hackathon/${userId}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
       );
       console.log("Subjects -> getSubjects -> subjects", subjects);
       console.log(subjects.data);
@@ -46,13 +55,14 @@ function ViewHackathon() {
 
   return (
     <>
-      {console.log("from view" + subjects.name)}
+      {console.log("from view" + userId)}
       <Fragment>
         <Boxes
           items={subjects.name}
+          style={{padding: "10px",margin: 2}}
           loading={loading}
           logo="School"
-          thisCategory="Subjects"
+          thisCategory="Hackathon Certificates"
           // goToDetails={goToDetails}
         />
       </Fragment>

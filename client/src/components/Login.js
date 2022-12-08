@@ -47,20 +47,21 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    sendRequest(data).then((res_data) => {
-      // console.log("sdfsdf" + JSON.stringify(res_data));
+    sendRequest(data);
+    // .then((res_data) => {
+    //   // console.log("sdfsdf" + JSON.stringify(res_data));
 
-      // if ((res_data.data.name = "AxiosError")) {
-      //   alert("incorrect credentials");
-      // } else {
-      localStorage.setItem("userId", JSON.stringify(res_data.data.rollNo));
-      // localStorage.setItem("user", JSON.stringify(true));
-      console.log("sdfsdf" + res_data.data.rollNo);
+    //   // if ((res_data.data.name = "AxiosError")) {
+    //   //   alert("incorrect credentials");
+    //   // } else {
+    //   localStorage.setItem("userId", JSON.stringify(res_data.data.rollNo));
+    //   // localStorage.setItem("user", JSON.stringify(true));
+    //   console.log("sdfsdf" + res_data.data.rollNo);
 
-      dispatch(authActions.login());
-      navigate("/dashboard");
-      // }
-    });
+    //   dispatch(authActions.login());
+    //   navigate("/dashboard");
+    //   // }
+    // });
     console.log({
       rollno: data.get("rollNo"),
       password: data.get("password"),
@@ -73,6 +74,22 @@ export default function Login() {
         rollNo: data.get("rollNo"),
         password: data.get("password"),
       })
+      .then((res) => {
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        // console.log("sdfsdf" + JSON.stringify(res_data));
+
+        // if ((res_data.data.name = "AxiosError")) {
+        //   alert("incorrect credentials");
+        // } else {
+        localStorage.setItem("userId", JSON.stringify(res.data.username));
+        // localStorage.setItem("user", JSON.stringify(true));
+        console.log("rollNO" + res.data.username);
+        console.log("token" + res.data.token);
+
+        dispatch(authActions.login());
+        navigate("/dashboard");
+      })
+
       .catch((err) => {
         console.log(err);
       });

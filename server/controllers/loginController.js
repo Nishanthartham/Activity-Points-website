@@ -44,15 +44,16 @@ export const findUser = async (req, res) => {
       //   { name: user.name, userName: user.username },
       //   "Praumasnsuni#5"
       // );
-      const token = jwt.sign(
+      const accessToken = jwt.sign(
         { name: user_data.name, rollno: user_data.rollNo },
-        "Praumasnsuni#5"
+        // { username: pass },
+        "token"
       );
-      res.status(200).json(user_data);
+      res.status(201).json({ token: accessToken, username: user_data.rollNo });
       console.log(user_data);
       console.log("user found");
     } else {
-      res.status(401).json({ message: "Password incorrect" });
+      res.status(502).json({ message: "roll no or Password incorrect" });
       return;
     }
   } catch (error) {

@@ -33,7 +33,12 @@ function ViewHackathon() {
     console.log(userId + "async");
     try {
       const subjects = await axios.get(
-        `http://localhost:5000/Certificate/hackathon/${userId}`
+        `http://localhost:5000/Certificate/hackathon/${userId}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
       );
       console.log("Subjects -> getSubjects -> subjects", subjects);
       console.log(subjects.data);

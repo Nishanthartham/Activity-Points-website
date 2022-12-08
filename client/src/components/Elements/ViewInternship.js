@@ -6,27 +6,34 @@ import { useNavigate } from "react-router-dom";
 function ViewInternship() {
   const [loading, setLoading] = useState(false);
   const [subjects, setSubjects] = useState({ username: null, name: [] });
+  const [userId, setUserId] = useState();
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
   console.log("outside effect");
-  useEffect(() => {
-    return () => {
-      console.log("Inside effect");
-      getSubjects();
-      console.log("Inside effect2");
-    };
-  }, []);
+  console.log(JSON.parse(localStorage.getItem("userId")));
 
+  useEffect(() => {
+    console.log("Inside effect");
+    // getusername();
+    setUserId(JSON.parse(localStorage.getItem("userId")));
+    console.log("Inside effect2 " + userId);
+    getSubjects();
+    console.log("Inside effect2");
+  }, userId);
+  const getusername = () => {
+    setUserId(JSON.parse(localStorage.getItem("userId")));
+  };
   // const goToDetails = (subjectId) => {
   //   navigate(`/Details/${subjectId}`);
   // };
 
   const getSubjects = async () => {
     setLoading(true);
+    console.log(userId + "async");
     try {
       const subjects = await axios.get(
-        "http://localhost:5000/Certificate/internship"
+        `http://localhost:5000/Certificate/internship/${userId}`
       );
       console.log("Subjects -> getSubjects -> subjects", subjects);
       console.log(subjects.data);
@@ -43,7 +50,7 @@ function ViewInternship() {
 
   return (
     <>
-      {console.log("from view" + subjects.name)}
+      {console.log("from view" + userId)}
       <Fragment>
         <Boxes
           items={subjects.name}
@@ -56,5 +63,4 @@ function ViewInternship() {
     </>
   );
 }
-
 export default ViewInternship;

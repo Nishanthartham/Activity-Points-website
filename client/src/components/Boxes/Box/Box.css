@@ -30,3 +30,9 @@
     width: 97%;
     height: 80vh;
 }
+.btn{
+    border-radius: 15px;
+    background-color: #a1c4fd;
+    padding: 15px;
+    margin: 0 10px 30px 30px;
+}

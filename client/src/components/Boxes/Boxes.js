@@ -4,7 +4,7 @@ import Intro from "../Intro/Intro";
 import ControlsBar from "../ControlsBar/ControlsBar";
 import Loader from "../UI/Loader/Loader";
 import "./Box/Box.css";
-
+import { useNavigate } from "react-router-dom";
 /**
  * Required Props:
  * 	loading
@@ -20,6 +20,7 @@ function Boxes(props) {
   console.log(props.items);
   let count = 0;
   const [dataState, setDataState] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     setDataState(props.items);
   }, [props.name]);
@@ -30,13 +31,31 @@ function Boxes(props) {
       ) : (
         <div>
           <Intro thisCategory={props.thisCategory} logo={props.logo} />
-          <ControlsBar
+          {/* <ControlsBar
             // search={props.search}
             // searching={props.searching}
             thisCategory={props.thisCategory}
             // goToAdd={props.goToAdd}
             // adding={true}
-          />
+          /> */}
+          <div className="nav-btns">
+            <button
+              className="btn"
+              onClick={() => {
+                navigate("/dashboard");
+              }}
+            >
+              Dashboard
+            </button>
+            <button
+              className="btn"
+              onClick={() => {
+                navigate("/uploadTypes");
+              }}
+            >
+              Upload
+            </button>
+          </div>
           {/* {props.items?.( */}
           {props.items !== null && (
             <div className="row">

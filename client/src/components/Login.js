@@ -53,7 +53,7 @@ export default function Login() {
       // if ((res_data.data.name = "AxiosError")) {
       //   alert("incorrect credentials");
       // } else {
-      localStorage.setItem("userId", res_data.data.rollNo);
+      localStorage.setItem("userId", JSON.stringify(res_data.data.rollNo));
       // localStorage.setItem("user", JSON.stringify(true));
       console.log("sdfsdf" + res_data.data.rollNo);
 

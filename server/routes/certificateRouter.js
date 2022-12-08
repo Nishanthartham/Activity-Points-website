@@ -21,7 +21,7 @@ const router = express.Router();
 router.post("/add8cred", addCertificate);
 console.log("Inside router");
 
-router.post("/hackathon", addHackathon);
+router.post("/hackathon/:id", addHackathon);
 router.get("/hackathon/:id", getHackathon);
 
 router.post("/internship", addInternship);

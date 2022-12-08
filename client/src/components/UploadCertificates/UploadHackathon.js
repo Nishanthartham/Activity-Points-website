@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Box from "@mui/material/Box";
-
+import "./Upload.css";
 // import useStyles from "./styles";
 function Hackathon() {
   // const classes = useStyles();
@@ -14,6 +14,7 @@ function Hackathon() {
     username: "fsd",
     selectedFile: "",
   });
+  const [userId, setUserId] = useState();
   // console.log("hack upload data " + Data.selectedFile);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,9 +31,16 @@ function Hackathon() {
     //   password: data.get("password"),
     // });
   };
+  useEffect(() => {
+    console.log("Inside effect");
+    // getusername();
+    setUserId(JSON.parse(localStorage.getItem("userId")));
+    console.log("Inside effect2 " + userId);
+    console.log("Inside effect2");
+  }, userId);
   const sendRequest = async (Data) => {
     const res = await axios
-      .post(`http://localhost:5000/Certificate/hackathon`, {
+      .post(`http://localhost:5000/Certificate/hackathon/${userId}`, {
         username: Data.username,
         name: Data.selectedFile,
       })
@@ -47,6 +55,24 @@ function Hackathon() {
     <>
       <div>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <div className="nav-btns">
+            <button
+              className="btn"
+              onClick={() => {
+                navigate("/dashboard");
+              }}
+            >
+              Dashboard
+            </button>
+            <button
+              className="btn"
+              onClick={() => {
+                navigate("/viewTypes");
+              }}
+            >
+              View
+            </button>
+          </div>
           <FileBase
             type="image/png"
             multiple={false}

@@ -9,7 +9,7 @@ function UploadCertificate() {
     <>
       <div className="parent">
         <div className="level1">
-          <div className="child" onClick={() => navigate("/uploadhackathon")}>
+          <div className="child" background-image="Activity-Points-website\client\public\foldericon.png" onClick={() => navigate("/uploadhackathon")}>
             Hackathon
           </div>
           <div className="child" onClick={() => navigate("/uploadinternship")}>

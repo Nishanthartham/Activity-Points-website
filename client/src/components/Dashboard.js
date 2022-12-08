@@ -8,38 +8,30 @@ import {
   Tabs,
   Tab,
 } from "@mui/material";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import { useNavigate } from "react-router-dom";
-import ReactTable from "react-table-6";  
-import "react-table-6/react-table.css";
 
+function createData(Activity, NoOfActivities, Points) {
+  return { Activity, NoOfActivities, Points };
+}
+const styles = theme => ({
+  tablecell: {
+    fontSize: '40pt',
+  },
+}); 
 function Dashboard() {
   const navigate = useNavigate();
-  const data = [{  
-    act: 'Hello',  
-     pts: 1  
-     },{  
-     act: 'Hey',  
-     pts: 2  
-     },{  
-     act: 'Hi',  
-     pts: 3   
-     },{  
-     act: 'Bye',  
-     pts: 4  
-     },{  
-     act: 'Welcome',  
-     pts: 5  
-     },{  
-     act: 'Thanks',  
-     pts: 6  
-     }]  
-const columns = [{  
-Header: 'Type of Activity',  
-    accessor: 'act'  
-   },{  
-   Header: 'Number Of Points',  
-   accessor: 'pts'  
-   }]
+  const rows = [
+    createData('Hackathon', 2, 10),
+    createData('Internship', 1, 16),
+    createData('Club', 3, 10),
+  ];
 
   return (
     <div>
@@ -66,17 +58,31 @@ Header: 'Type of Activity',
       <br>
       </br>
       <br></br>
-      
-      <ReactTable  style={{
-   borderBottom: 'solid 3px blue',
-   background: 'white',
-   fontWeight: 'bold',
- }}
-                   data={data}  
-                   columns={columns}  
-                   defaultPageSize = {2}  
-                   pageSizeOptions = {[2,4, 6]}  
-               /> 
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650}} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell align="center" ><h4><b>Activity</b></h4></TableCell>
+            <TableCell align="center"><h4><b>Number Of Activities</b></h4></TableCell>
+            <TableCell align="center"><h4><b>Activity Points</b></h4></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow
+              key={row.Activity}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row" align='center'>
+                <h5><b>{row.Activity}</b></h5>
+              </TableCell>
+              <TableCell align="center"><h5><b>{row.NoOfActivities}</b></h5></TableCell>
+              <TableCell align="center"><h5><b>{row.Points}</b></h5></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
               
       
     </>

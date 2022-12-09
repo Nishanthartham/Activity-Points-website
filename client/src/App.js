@@ -15,6 +15,7 @@ import UploadInternship from "./components/UploadCertificates/UploadInternship";
 import ViewInternship from "./components/Elements/ViewInternship";
 import ViewEightWeek from "./components/Elements/ViewEightWeek";
 import UploadEightWeek from "./components/UploadCertificates/UploadEightWeek";
+import Landing from "./components/Landing";
 
 function App() {
   const isSignup = useSelector((state) => state.isSignup);
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           {isSignup && <Route path="/auth" exact element={<SignUp />} />}
           {!isSignup && <Route path="/auth" exact element={<Login />} />}
+          <Route path="/" element={<Landing/>}/>
 
           <Route path="/viewhackathon" element={<ViewHackathon />} />
           <Route path="/viewinternship" element={<ViewInternship />} />

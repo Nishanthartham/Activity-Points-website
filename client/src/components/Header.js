@@ -34,6 +34,7 @@ const Header = () => {
   };
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   return (
+    <div>
     <AppBar
       position="sticky"
       sx={{
@@ -102,6 +103,8 @@ const Header = () => {
         </Box>
       </Toolbar>
     </AppBar>
+    </div>
+    
   );
 };
 

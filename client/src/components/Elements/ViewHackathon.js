@@ -17,7 +17,6 @@ function ViewHackathon() {
     const userId = JSON.parse(localStorage.getItem("userId"));
 
     setLoading(true);
-    console.log(userId + "async");
     try {
       console.log("inside view hack " + localStorage.getItem("token"));
       const hackData = await axios.get(
@@ -50,9 +49,10 @@ function ViewHackathon() {
       <Fragment>
         <Boxes
           items={subjects.name}
+          style={{ padding: "10px", margin: 2 }}
           loading={loading}
           logo="School"
-          thisCategory="Subjects"
+          thisCategory="Hackathon Certificates"
           // goToDetails={goToDetails}
         />
       </Fragment>

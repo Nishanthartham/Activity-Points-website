@@ -46,7 +46,31 @@ function UploadEightWeek() {
   return (
     <>
       <div>
+        
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <div className="nav-btns">
+            <center>
+            <button
+            style={{background: "rgb(56,85,41)", color: "white"}}
+              className="btn"
+              onClick={() => {
+                navigate("/dashboard");
+              }}
+            >
+             DASHBOARD
+            </button>
+            <button
+            style={{background: "rgb(56,85,41)", color: "white"}}
+              className="btn"
+              onClick={() => {
+                navigate("/viewTypes");
+              }}
+            >
+              VIEW
+            </button>
+            </center>
+          </div>
+          <center>
           <FileBase
             type="file"
             multiple={false}
@@ -60,13 +84,14 @@ function UploadEightWeek() {
           />
           <Button
             type="submit"
-            fullWidth
+          
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            style={{ backgroundColor: "#8b181b" }}
+            style={{ backgroundColor: "#8b181b" , marginTop: 30, "border-radius":"15px", width:"300px"}}
           >
             <h5>Submit</h5>
           </Button>
+          </center>
         </Box>
       </div>
     </>

@@ -40,23 +40,27 @@ function Boxes(props) {
             // goToAdd={props.goToAdd}
             // adding={true}
           /> */}
-          <div className="nav-btns">
+          <div className="nav-btns" >
+          <center>
             <button
+            style={{background: "rgb(56,85,41)", color: "white"}}
               className="btn"
               onClick={() => {
                 navigate("/dashboard");
               }}
             >
-              Dashboard
+              DASHBOARD
             </button>
             <button
+             style={{background: "rgb(56,85,41)", color: "white"}}
               className="btn"
               onClick={() => {
                 navigate("/uploadTypes");
               }}
             >
-              Upload
+              UPLOAD
             </button>
+            </center>
           </div>
           {/* {props.items?.( */}
           {props.items !== null && (

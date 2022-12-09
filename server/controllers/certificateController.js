@@ -11,9 +11,9 @@ import jwt, { decode } from "jsonwebtoken";
 // console.log(username);
 export const addHackathon = async (req, res) => {
   try {
-    const username = req.params.id;
+    const username = req.id;
     console.log("Adding certificate");
-    let present = await Hackathon.findOne({ username: req.id });
+    let present = await Hackathon.findOne({ username: username });
     // console.log("asdfa" + present);
     if (present) {
       console.log("found");
@@ -35,8 +35,8 @@ export const addHackathon = async (req, res) => {
       const certificate_data = await Hackathon.findOne({
         username: username,
       });
+      console.log("Certificate Added" + certificate_data);
       res.status(200).json(certificate_data);
-      // console.log("Certificate Added" + certificate_data);
       // console.log("Certificate Added" + certificate_data);
     } else {
       console.log("not found inserting newly");
@@ -59,7 +59,7 @@ export const getHackathon = async (req, res) => {
     let present = await Hackathon.findOne({ username: req.id });
     console.log("asdfa" + present);
     if (present) {
-      console.log("found");
+      console.log("found hackathon project");
       const certificate_data = await Hackathon.findOne({
         username: req.id,
       });
@@ -79,7 +79,7 @@ export const getHackathonCount = async (req, res) => {
     console.log("Getting certifcate");
     let present = await Hackathon.findOne({ username: req.id });
     console.log("req" + req.id);
-    console.log("asdfa" + present);
+    // console.log("asdfa" + present);
     if (present) {
       console.log("found");
       const certificate_data = await Hackathon.findOne({
@@ -99,6 +99,7 @@ export const getHackathonCount = async (req, res) => {
 
 export const addInternship = async (req, res) => {
   try {
+    const username = req.id;
     console.log("Adding Internship certificate");
     let present = await Internship.findOne({ username: username });
     // console.log("asdfa" + present);
@@ -143,11 +144,11 @@ export const getInternship = async (req, res) => {
     let present = await Internship.findOne({ username: req.id });
     console.log("asdfa" + present);
     if (present) {
-      console.log("found");
+      console.log("found internship certificate");
       const certificate_data = await Internship.findOne({
         username: req.id,
       });
-      res.status(200).json(certificate_data.name.length);
+      res.status(200).json(certificate_data);
     } else {
       console.log("certificate not found");
       res.status(401).json({ message: "No user found" });
@@ -160,10 +161,12 @@ export const getInternship = async (req, res) => {
 };
 export const getInternshipCount = async (req, res) => {
   try {
-    const username = req.params.id;
+    const username = req.id;
     console.log("Getting internship certifcate");
     let present = await Internship.findOne({ username: username });
-    console.log("asdfa" + present);
+    console.log("req" + req.id);
+
+    // console.log("asdfa" + present);
     if (present) {
       console.log("found");
       const certificate_data = await Internship.findOne({ username: username });

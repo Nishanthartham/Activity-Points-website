@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import {
   AppBar,
   Typography,
@@ -26,12 +28,94 @@ const styles = (theme) => ({
   },
 });
 function Dashboard() {
+  const [loading, setLoading] = useState(false);
+  // const [userId, setUserId] = useState();
+  // const [hackPoints, setHackPoints] = useState(0);
+  // const [internPoints, setInternPoints] = useState(0);
+  const [rows, setRows] = useState([{}]);
+  // const rows = [];
   const navigate = useNavigate();
-  const rows = [
-    createData("Hackathon", 2, 10),
-    createData("Internship", 1, 16),
-    createData("Club", 3, 10),
-  ];
+  // const data = () => {
+  // const rows = [
+  //   createData("Hackathon", hackPoints, 10),
+  //   createData("Internship", internPoints, 16),
+  //   createData("Club", 3, 10),
+  // ];
+  // };
+  // useEffect(() => {
+  //   console.log("Inside effect");
+  //   // getusername();
+  //   setUserId(JSON.parse(localStorage.getItem("userId")));
+  //   console.log("Inside effect2 " + userId);
+
+  //   getHackathon();
+  //   console.log(hackPoints);
+  //   getInternship();
+
+  //   // data();
+  //   console.log(rows);
+  // }, userId);
+  const userId = JSON.parse(localStorage.getItem("userId"));
+
+  // const getusername = () => {
+  //   setUserId(JSON.parse(localStorage.getItem("userId")));
+  // };
+  // const goToDetails = (subjectId) => {
+  //   navigate(`/Details/${subjectId}`);
+  // };
+
+  const getHackathon = async () => {
+    setLoading(true);
+    console.log(userId + "async");
+    try {
+      const subjects = await axios
+        .get(`http://localhost:5000/Certificate/hackathonCount/`, {
+          headers: {
+            authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        })
+        .then((res) => {
+          console.log("Subjects -> getSubjects -> subjects", res);
+          console.log(res.data);
+          // setHackPoints(subjects.data);
+          setRows([...rows, createData("Hackathon", res.data, res.data * 4)]);
+          // rows.push(createData("Hackathon", res.data, res.data * 4));
+          setLoading(false);
+        });
+      getInternship();
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+  const getInternship = async () => {
+    setLoading(true);
+    console.log(userId + "async");
+    try {
+      const subjects = await axios
+        .get(`http://localhost:5000/Certificate/internshipCount/`, {
+          headers: {
+            authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        })
+        .then((res) => {
+          // res = JSON.parse(res);
+          console.log("Subjects -> getSubjects -> subjects", res);
+          console.log(res.data);
+          console.log("before" + rows);
+          setRows([...rows, createData("Internship", res.data, res.data * 4)]);
+          // rows.push(createData("Hackathon", res.data, res.data * 4));
+          console.log(rows);
+          setLoading(false);
+        });
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    getHackathon();
+  }, []);
 
   return (
     <div>

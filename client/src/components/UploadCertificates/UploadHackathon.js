@@ -14,7 +14,7 @@ function Hackathon() {
     username: "fsd",
     selectedFile: "",
   });
-  const [userId, setUserId] = useState();
+  // const [userId, setUserId] = useState();
   // console.log("hack upload data " + Data.selectedFile);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,18 +31,22 @@ function Hackathon() {
     //   password: data.get("password"),
     // });
   };
-  useEffect(() => {
-    console.log("Inside effect");
-    // getusername();
-    setUserId(JSON.parse(localStorage.getItem("userId")));
-    console.log("Inside effect2 " + userId);
-    console.log("Inside effect2");
-  }, userId);
+  // useEffect(() => {
+  //   console.log("Inside effect");
+  //   // getusername();
+  //   setUserId(JSON.parse(localStorage.getItem("userId")));
+  //   console.log("Inside effect2 " + userId);
+  //   console.log("Inside effect2");
+  // }, userId);
   const sendRequest = async (Data) => {
+    console.log(JSON.parse(localStorage.getItem("token")));
     const res = await axios
-      .post(`http://localhost:5000/Certificate/hackathon/${userId}`, {
-        username: Data.username,
-        name: Data.selectedFile,
+      .post(`http://localhost:5000/Certificate/hackathon/`, {
+        headers: { authorization: JSON.parse(localStorage.getItem("token")) },
+        body: {
+          username: Data.username,
+          name: Data.selectedFile,
+        },
       })
       .catch((err) => {
         console.log(err);

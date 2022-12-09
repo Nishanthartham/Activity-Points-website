@@ -22,31 +22,33 @@ function App() {
   console.log(isSignup);
   console.log("log in" + isLoggedIn);
   return (
-    <React.Fragment>
-      <header>
-        <Header />
-      </header>
-      <main>
-        <Routes>
-          {isSignup && <Route path="/auth" exact element={<SignUp />} />}
-          {!isSignup && <Route path="/auth" exact element={<Login />} />}
+    <>
+      <React.Fragment>
+        <header>
+          <Header />
+        </header>
+        <main>
+          <Routes>
+            {isSignup && <Route path="/auth" exact element={<SignUp />} />}
+            {!isSignup && <Route path="/auth" exact element={<Login />} />}
+            <Route path="/viewhackathon" element={<ViewHackathon />} />
+            {console.log("dsa")}
+            <Route path="/viewinternship" element={<ViewInternship />} />
+            <Route path="/vieweightweek" element={<ViewEightWeek />} />
 
-          <Route path="/viewhackathon" element={<ViewHackathon />} />
-          <Route path="/viewinternship" element={<ViewInternship />} />
-          <Route path="/vieweightweek" element={<ViewEightWeek />} />
+            <Route path="/viewtypes" element={<ViewCertificate />} />
+            <Route path="/uploadtypes" element={<UploadCertificate />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
-          <Route path="/viewtypes" element={<ViewCertificate />} />
-          <Route path="/uploadtypes" element={<UploadCertificate />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/uploadhackathon" element={<UploadHackathon />} />
+            <Route path="/uploadinternship" element={<UploadInternship />} />
+            <Route path="/uploadeightweek" element={<UploadEightWeek />} />
 
-          <Route path="/uploadhackathon" element={<UploadHackathon />} />
-          <Route path="/uploadinternship" element={<UploadInternship />} />
-          <Route path="/uploadeightweek" element={<UploadEightWeek />} />
-
-          {/* <Route path="/internship" element={<Internship />} /> */}
-        </Routes>
-      </main>
-    </React.Fragment>
+            {/* <Route path="/internship" element={<Internship />} /> */}
+          </Routes>
+        </main>
+      </React.Fragment>
+    </>
   );
 }
 

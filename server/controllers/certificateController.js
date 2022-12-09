@@ -13,7 +13,7 @@ export const addHackathon = async (req, res) => {
   try {
     const username = req.params.id;
     console.log("Adding certificate");
-    let present = await Hackathon.findOne({ username: req.params.id });
+    let present = await Hackathon.findOne({ username: req.id });
     // console.log("asdfa" + present);
     if (present) {
       console.log("found");
@@ -56,14 +56,36 @@ export const addHackathon = async (req, res) => {
 export const getHackathon = async (req, res) => {
   try {
     console.log("Getting certifcate");
-    let present = await Hackathon.findOne({ username: req.params["id"] });
+    let present = await Hackathon.findOne({ username: req.id });
     console.log("asdfa" + present);
     if (present) {
       console.log("found");
       const certificate_data = await Hackathon.findOne({
-        username: req.params["id"],
+        username: req.id,
       });
       res.status(200).json(certificate_data);
+    } else {
+      console.log("certificate not found");
+      res.status(401).json({ message: "No user found" });
+      console.log(" User has no hackathon certificates ");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
+export const getHackathonCount = async (req, res) => {
+  try {
+    console.log("Getting certifcate");
+    let present = await Hackathon.findOne({ username: req.id });
+    console.log("req" + req.id);
+    console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      const certificate_data = await Hackathon.findOne({
+        username: req.id,
+      });
+      res.status(200).json(certificate_data.name.length);
     } else {
       console.log("certificate not found");
       res.status(401).json({ message: "No user found" });
@@ -118,16 +140,38 @@ export const addInternship = async (req, res) => {
 export const getInternship = async (req, res) => {
   try {
     console.log("Getting internship certifcate");
+    let present = await Internship.findOne({ username: req.id });
+    console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      const certificate_data = await Internship.findOne({
+        username: req.id,
+      });
+      res.status(200).json(certificate_data.name.length);
+    } else {
+      console.log("certificate not found");
+      res.status(401).json({ message: "No user found" });
+      console.log(" User has no Internship certificates ");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
+export const getInternshipCount = async (req, res) => {
+  try {
+    const username = req.params.id;
+    console.log("Getting internship certifcate");
     let present = await Internship.findOne({ username: username });
     console.log("asdfa" + present);
     if (present) {
       console.log("found");
       const certificate_data = await Internship.findOne({ username: username });
-      res.status(200).json(certificate_data);
+      res.status(200).json(certificate_data.name.length);
     } else {
       console.log(" internship certificate not found");
-      res.status(401).json({ message: "No user found" });
-      console.log(" User has no hackathon certificates ");
+      res.status(200).json(0);
+      console.log(" User has no internship certificates ");
     }
   } catch (error) {
     res.status(401).json({ message: "Some error :(" });

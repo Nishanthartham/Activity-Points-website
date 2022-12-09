@@ -21,9 +21,11 @@ function Boxes(props) {
   let count = 0;
   const [dataState, setDataState] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     setDataState(props.items);
   }, [props.name]);
+
   return (
     <Fragment>
       {props.loading ? (

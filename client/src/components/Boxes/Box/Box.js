@@ -27,9 +27,7 @@ function Box(props) {
             <div className="box">
               {/* <div className="box" onClick={props.goToDetails}> */}
               <div className="goToDetails">
-                <div className="centerIt">
-                  {props.logo === "School" ? <School /> : <Class />}
-                </div>
+                
                 {/* <div>{props.name}</div> */}
                 {/* <img src={props.name} /> */}
 
@@ -43,8 +41,10 @@ function Box(props) {
                   alt="Image"
                   className="certi-image"
                 />
+                
                 {/* <a href={"data:image/png;base64," + img}>hack link</a> */}
               </div>
+              
               {/* <div className="options">
             <div>
               {" "}

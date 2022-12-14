@@ -3,7 +3,7 @@ import "./viewCertificate.css";
 const myStyle={
   backgroundImage: 
 "url('https://i0.wp.com/mrcampbellrocks.com/wp-content/uploads/2022/07/Free-Mac-Folder-Icons-54.png?w=840&ssl=1')",
-  height:'40vh',
+  height:'45vh',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
 };

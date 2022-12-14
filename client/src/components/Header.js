@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store";
 import { useNavigate } from "react-router-dom";
+import { textAlign } from "@mui/system";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -42,15 +43,27 @@ const Header = () => {
       }}
     >
       <Toolbar>
-        <Typography
-          className={classes.font}
-          variant="h4"
-          style={{ cursor: "pointer" }}
+        <button
+          // className={classes.font}
+          // variant="h4"
+          // style={{ cursor: "pointer" }}
+          // className="APT_btn"
+          style={{
+            height: "7vh",
+            borderColor: "#a16b15",
+            borderRadius: "none",
+            backgroundColor: "rgb(56, 85, 41)",
+            fontSize : '20px',
+            textAlign:"center"
+          }}
+          onClick={() => {
+            navigate("/");
+          }}
         >
           APT
-        </Typography>
+        </button>
         <Box display="flex" marginLeft={"auto"}>
-          {isLoggedIn && (
+          {/* {isLoggedIn && (
             <>
               <Button
                 variant="text"
@@ -69,7 +82,7 @@ const Header = () => {
                 Upload
               </Button>
             </>
-          )}
+          )} */}
           {!isLoggedIn && (
             <>
               <Button

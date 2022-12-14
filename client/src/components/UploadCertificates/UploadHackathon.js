@@ -90,7 +90,7 @@ function Hackathon() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               style={{
-                "background-color": "#8b181b",
+                backgroundColor: "#8b181b",
                 marginTop: 30,
                 "border-radius": "15px",
                 width: "300px",

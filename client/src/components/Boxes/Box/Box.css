@@ -15,7 +15,7 @@
     position: relative;
     right: 20rem;
     width: 85rem;
-    height: 100vh;
+    height: 100%;
     background-image: linear-gradient(120deg, rgb(56,85,41) 0%, rgb(97, 146, 72) 20%);
     box-sizing: border-box;
     overflow: hidden;
@@ -27,12 +27,6 @@
     border-radius: 15px;
 }
 .certi-image {
-    width: 97%;
-    height: 80vh;
-}
-.btn{
-    border-radius: 15px;
-    background-color: #a1c4fd;
-    padding: 15px;
-    margin: 0 10px 30px 30px;
+    width: 100%;
+    height: 97%;
 }

@@ -45,9 +45,9 @@ export const findUser = async (req, res) => {
       //   "Praumasnsuni#5"
       // );
       const accessToken = jwt.sign(
-        { name: user_data.name, rollno: user_data.rollNo },
-        // { username: pass },
-        "token"
+        // { name: user_data.name, rollno: user_data.rollNo },
+        { username: user_data.rollNo },
+        "tokens"
       );
       res.status(201).json({ token: accessToken, username: user_data.rollNo });
       console.log(user_data);

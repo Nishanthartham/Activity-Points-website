@@ -31,24 +31,25 @@ function App() {
         <Routes>
           {isSignup && <Route path="/auth" exact element={<SignUp />} />}
           {!isSignup && <Route path="/auth" exact element={<Login />} />}
-          <Route path="/" element={<Landing/>}/>
+          <Route path ="/" element={<Landing/>}/>
 
           <Route path="/viewhackathon" element={<ViewHackathon />} />
           <Route path="/viewinternship" element={<ViewInternship />} />
           <Route path="/vieweightweek" element={<ViewEightWeek />} />
 
-          <Route path="/viewtypes" element={<ViewCertificate />} />
-          <Route path="/uploadtypes" element={<UploadCertificate />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/viewtypes" element={<ViewCertificate />} />
+            <Route path="/uploadtypes" element={<UploadCertificate />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
-          <Route path="/uploadhackathon" element={<UploadHackathon />} />
-          <Route path="/uploadinternship" element={<UploadInternship />} />
-          <Route path="/uploadeightweek" element={<UploadEightWeek />} />
+            <Route path="/uploadhackathon" element={<UploadHackathon />} />
+            <Route path="/uploadinternship" element={<UploadInternship />} />
+            <Route path="/uploadeightweek" element={<UploadEightWeek />} />
 
-          {/* <Route path="/internship" element={<Internship />} /> */}
-        </Routes>
-      </main>
-    </React.Fragment>
+            {/* <Route path="/internship" element={<Internship />} /> */}
+          </Routes>
+        </main>
+      </React.Fragment>
+    
   );
 }
 

@@ -6,45 +6,32 @@ import { useNavigate } from "react-router-dom";
 function ViewHackathon() {
   const [loading, setLoading] = useState(false);
   const [subjects, setSubjects] = useState({ username: null, name: [] });
-  const [userId, setUserId] = useState();
-  const [searchText, setSearchText] = useState("");
+  // const [userId, setUserId] = useState();
+  // const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
   console.log("outside effect");
   console.log(JSON.parse(localStorage.getItem("userId")));
 
-  useEffect(() => {
-    console.log("Inside effect");
-    // getusername();
-    setUserId(JSON.parse(localStorage.getItem("userId")));
-    console.log("Inside effect2 " + userId);
-    getSubjects();
-    console.log("Inside effect2");
-  }, userId);
-  const getusername = () => {
-    setUserId(JSON.parse(localStorage.getItem("userId")));
-  };
-  // const goToDetails = (subjectId) => {
-  //   navigate(`/Details/${subjectId}`);
-  // };
-
   const getSubjects = async () => {
+    const userId = JSON.parse(localStorage.getItem("userId"));
+
     setLoading(true);
-    console.log(userId + "async");
     try {
-      const subjects = await axios.get(
-        `http://localhost:5000/Certificate/hackathon/${userId}`,
+      console.log("inside view hack " + localStorage.getItem("token"));
+      const hackData = await axios.get(
+        `http://localhost:5000/Certificate/hackathon/`,
         {
           headers: {
-            Authorization: localStorage.getItem("token"),
+            authorization: JSON.parse(localStorage.getItem("token")),
           },
         }
       );
-      console.log("Subjects -> getSubjects -> subjects", subjects);
-      console.log(subjects.data);
+      console.log("Subjects -> getSubjects -> subjects", hackData);
+      console.log(hackData.data);
       setSubjects({
-        username: subjects.data.username,
-        name: subjects.data.name,
+        username: hackData.data.username,
+        name: hackData.data.name,
       });
       setLoading(false);
     } catch (error) {
@@ -52,14 +39,17 @@ function ViewHackathon() {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    getSubjects();
+  }, []);
 
   return (
     <>
-      {console.log("from view" + userId)}
+      {/* {console.log("from view" + userId)} */}
       <Fragment>
         <Boxes
           items={subjects.name}
-          style={{padding: "10px",margin: 2}}
+          style={{ padding: "10px", margin: 2 }}
           loading={loading}
           logo="School"
           thisCategory="Hackathon Certificates"

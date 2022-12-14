@@ -163,14 +163,14 @@ export const getInternshipCount = async (req, res) => {
   try {
     const username = req.id;
     console.log("Getting internship certifcate");
-    let present = await Internship.findOne({ username: username });
+    const present = await Internship.findOne({ username: username });
     console.log("req" + req.id);
 
     // console.log("asdfa" + present);
     if (present) {
       console.log("found");
-      const certificate_data = await Internship.findOne({ username: username });
-      res.status(200).json(certificate_data.name.length);
+      // const certificate_data = await Internship.findOne({ username: username });
+      res.status(200).json(present.name.length);
     } else {
       console.log(" internship certificate not found");
       res.status(200).json(0);

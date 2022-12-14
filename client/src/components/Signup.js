@@ -200,7 +200,7 @@ export default function SignUp() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                style={{ "background-color": "#8b181b" }}
+                style={{ backgroundColor: "#8b181b" }}
               >
                 <h5>Sign Up</h5>
               </Button>

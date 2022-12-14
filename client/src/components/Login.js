@@ -175,7 +175,7 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                style={{ "background-color": "#8b181b" }}
+                style={{ backgroundColor: "#8b181b" }}
               >
                 <h5>Sign In</h5>
               </Button>

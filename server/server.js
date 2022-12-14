@@ -24,20 +24,21 @@ console.log("app.js");
 app.use("/Certificate", certificateRouter);
 
 const PORT = process.env.PORT || 5000;
-const url = "mongodb://localhost:27017/ActivityPoints";
+// const url = "mongodb://localhost:27017/ActivityPoints";
+const url = "mongodb://127.0.0.1:27017/ActivityPoints";
 app.listen(PORT, () => {
   console.log(`App is running at ${PORT} port`);
 });
-mongoose.connect(
-  "mongodb+srv://main-user-42:main-user-42@cluster0.k9k0a.mongodb.net/ActivityPoints",
-  () => {
-    console.log("database connected");
-  }
-);
+// mongoose.connect(
+//   "mongodb+srv://main-user-42:main-user-42@cluster0.k9k0a.mongodb.net/ActivityPoints",
+//   () => {
+//     console.log("database connected");
+//   }
+// );
 
-// mongoose.connect(url, () => {
-//   console.log("Database connected");
-// });
+mongoose.connect(url, () => {
+  console.log("Database connected");
+});
 
 // .then (()=>app.listen((PORT),()=>console.log(`App is running at ${PORT} port`)))
 // .catch((err)=>console.log(err.message))

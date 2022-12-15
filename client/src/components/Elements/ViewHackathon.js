@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function ViewHackathon() {
   const [loading, setLoading] = useState(false);
-  const [subjects, setSubjects] = useState({ username: null, name: [] });
+  const [subjects, setSubjects] = useState({ _id: null, name: [] });
   // const [userId, setUserId] = useState();
   // const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
@@ -13,6 +13,29 @@ function ViewHackathon() {
   console.log("outside effect");
   console.log(JSON.parse(localStorage.getItem("userId")));
 
+  const deleteSubject = async (subjectId, certificate_loc) => {
+    console.log("delete" + certificate_loc);
+    if (window.confirm(`Do you want to delete the selected certificate `)) {
+      try {
+        const deleted_data = await axios
+          .delete(
+            `http://localhost:5000/Certificate/hackathon/${certificate_loc}`,
+            {
+              headers: {
+                authorization: JSON.parse(localStorage.getItem("token")),
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+            getSubjects();
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   const getSubjects = async () => {
     const userId = JSON.parse(localStorage.getItem("userId"));
 
@@ -30,7 +53,7 @@ function ViewHackathon() {
       console.log("Subjects -> getSubjects -> subjects", hackData);
       console.log(hackData.data);
       setSubjects({
-        username: hackData.data.username,
+        _id: hackData.data._id,
         name: hackData.data.name,
       });
       setLoading(false);
@@ -48,11 +71,13 @@ function ViewHackathon() {
       {/* {console.log("from view" + userId)} */}
       <Fragment>
         <Boxes
-          items={subjects.name}
+          items={subjects}
+          id={subjects._id}
           style={{ padding: "10px", margin: 2 }}
           loading={loading}
           logo="School"
           thisCategory="Hackathon Certificates"
+          delete={deleteSubject}
           // goToDetails={goToDetails}
         />
       </Fragment>

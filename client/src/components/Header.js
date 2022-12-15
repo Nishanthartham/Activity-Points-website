@@ -28,6 +28,7 @@ const Header = () => {
   };
   const logout = () => {
     localStorage.removeItem("userId");
+    localStorage.removeItem("token");
     dispatch(authActions.logout());
     dispatch(authActions.signin());
     navigate("/auth");

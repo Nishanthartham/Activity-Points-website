@@ -8,23 +8,23 @@ import { useNavigate } from "react-router-dom";
 /**
  * Required Props:
  * 	loading
- * 	logo
  * 	thisCategory
  * 	items
  * 	goToAdd
+ * 	logo
  * 	goToEdit
  * 	delete
  *	goToDetails
  */
 function Boxes(props) {
-  console.log(props.items);
+  console.log("from boxes" + JSON.stringify(props.items));
   let count = 0;
   const [dataState, setDataState] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setDataState(props.items);
-  }, [props.name]);
+  // useEffect(() => {
+  //   setDataState(props.items);
+  // }, [props.name]);
 
   return (
     <Fragment>
@@ -63,10 +63,12 @@ function Boxes(props) {
             </center>
           </div>
           {/* {props.items?.( */}
-          {props.items !== null && (
+          {props.items.name !== null && (
             <div className="row">
-              {props.items.map((certificate) => {
+              {props.items.name.map((certificate, index) => {
+                // console.log("index " + index)
                 console.log("boxes.js " + certificate);
+                console.log("boxes.js index " + index);
                 count += 1;
                 return (
                   <Box
@@ -74,7 +76,7 @@ function Boxes(props) {
                     // key={`${props.items._id.toString()}${count}`}
                     logo={props.logo}
                     //   goToEdit={() => props.goToEdit(item._id.toString())}
-                    //   delete={() => props.delete(item._id.toString(), item.name)}
+                    delete={() => props.delete(props.id.toString(), index)}
                     // goToDetails={() =>
                     //   props.goToDetails(props.items.name._id.toString())
                     // }

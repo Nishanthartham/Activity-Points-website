@@ -5,6 +5,7 @@ import {
   addHackathon,
   getHackathon,
   getHackathonCount,
+  deleteHackathon,
 } from "../controllers/certificateController.js";
 import {
   addInternship,
@@ -28,6 +29,7 @@ router.post("/add8cred", addCertificate);
 console.log("Inside router");
 
 router.post("/hackathon", Auth, addHackathon);
+router.delete("/hackathon/:id", Auth, deleteHackathon);
 router.get("/hackathon/", Auth, getHackathon);
 router.get("/hackathonCount/", Auth, getHackathonCount);
 

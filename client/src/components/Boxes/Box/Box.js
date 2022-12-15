@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 // import "./Box.scss";
 import "./Box.css";
+import { IconButton } from "@mui/material";
 import { School, Class } from "@mui/icons-material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Card,
   CardActions,
@@ -12,15 +14,14 @@ import {
 } from "@mui/material";
 
 function Box(props) {
-  console.log("from boxe " + props.name);
-  const [img, setImg] = useState("");
-  useEffect(() => {
-    setImg(props.name);
-  }, [props.name]);
-
+  // const [img, setImg] = useState("");
+  // useEffect(() => {
+  //   setImg(props.name);
+  // }, [props.name]);
+  console.log(props.name);
   return (
     <>
-      {img !== null && (
+      {props.name !== null && (
         <div className="col-md-4" style={{ marginBottom: "20px" }}>
           <div className="wrap">
             {/* invoking parent function call through props  */}
@@ -39,14 +40,14 @@ function Box(props) {
 
                 <img
                   // src={"data:image/png;base64," + img}
-                  src={img}
+                  src={props.name}
                   alt="Image"
                   className="certi-image"
                 />
                 {/* <a href={"data:image/png;base64," + img}>hack link</a> */}
               </div>
-              {/* <div className="options">
-            <div>
+              <div className="options">
+                {/* <div>
               {" "}
               <IconButton
                 aria-label="visit"
@@ -55,25 +56,25 @@ function Box(props) {
               >
                 <Visibility />
               </IconButton>
-            </div>
-
+            </div> */}
+                {/* 
             <div>
               {" "}
               <IconButton aria-label="edit" onClick={props.goToEdit}>
                 <EditIcon />
               </IconButton>
-            </div>
-            <div>
-              {" "}
-              <IconButton
-                aria-label="delete"
-                color="secondary"
-                onClick={props.delete}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </div>
-          </div> */}
+            </div> */}
+                <div>
+                  {" "}
+                  <IconButton
+                    aria-label="delete"
+                    color="secondary"
+                    onClick={props.delete}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </div>
+              </div>
             </div>
           </div>
         </div>

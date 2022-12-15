@@ -97,6 +97,46 @@ export const getHackathonCount = async (req, res) => {
   }
 };
 
+export const deleteHackathon = async (req, res) => {
+  try {
+    const username = req.id;
+    console.log("deleting hackathon certificate");
+    const index = JSON.parse(req.params.id);
+    let present = await Hackathon.findOne({ username: username });
+    // console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      let hack_data = present.name;
+      hack_data.splice(index, 1);
+      const certificate = await Hackathon.updateOne(
+        {
+          username: username,
+        },
+        {
+          $set: {
+            username: username,
+            name: hack_data, //splice
+          },
+        },
+        { new: true }
+      );
+
+      console.log("saved in mongo");
+      const certificate_data = await Hackathon.findOne({
+        username: username,
+      });
+      console.log("Certificate deleted successfully" + certificate_data);
+      res.status(200).json(certificate_data);
+      // console.log("Certificate Added" + certificate_data);
+    } else {
+      console.log("cant find record cant delete");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
+
 export const addInternship = async (req, res) => {
   try {
     const username = req.id;

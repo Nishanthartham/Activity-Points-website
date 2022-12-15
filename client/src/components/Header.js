@@ -50,14 +50,14 @@ const Header = () => {
           // className="APT_btn"
           style={{
             height: "7vh",
-            borderColor: "#a16b15",
+            border: "none",
             borderRadius: "none",
             backgroundColor: "rgb(56, 85, 41)",
             fontSize : '20px',
             textAlign:"center"
           }}
           onClick={() => {
-            navigate("/");
+            navigate("/dashboard");
           }}
         >
           APT

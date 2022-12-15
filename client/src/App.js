@@ -15,6 +15,7 @@ import UploadInternship from "./components/UploadCertificates/UploadInternship";
 import ViewInternship from "./components/Elements/ViewInternship";
 import ViewEightWeek from "./components/Elements/ViewEightWeek";
 import UploadEightWeek from "./components/UploadCertificates/UploadEightWeek";
+import Landing from "./components/Landing";
 
 function App() {
   const isSignup = useSelector((state) => state.isSignup);
@@ -22,19 +23,19 @@ function App() {
   console.log(isSignup);
   console.log("log in" + isLoggedIn);
   return (
-    <>
-      <React.Fragment>
-        <header>
-          <Header />
-        </header>
-        <main>
-          <Routes>
-            {isSignup && <Route path="/auth" exact element={<SignUp />} />}
-            {!isSignup && <Route path="/auth" exact element={<Login />} />}
-            <Route path="/viewhackathon" element={<ViewHackathon />} />
-            {console.log("dsa")}
-            <Route path="/viewinternship" element={<ViewInternship />} />
-            <Route path="/vieweightweek" element={<ViewEightWeek />} />
+    <React.Fragment>
+      <header>
+        <Header />
+      </header>
+      <main>
+        <Routes>
+          {isSignup && <Route path="/auth" exact element={<SignUp />} />}
+          {!isSignup && <Route path="/auth" exact element={<Login />} />}
+          <Route path ="/" element={<Landing/>}/>
+
+          <Route path="/viewhackathon" element={<ViewHackathon />} />
+          <Route path="/viewinternship" element={<ViewInternship />} />
+          <Route path="/vieweightweek" element={<ViewEightWeek />} />
 
             <Route path="/viewtypes" element={<ViewCertificate />} />
             <Route path="/uploadtypes" element={<UploadCertificate />} />
@@ -48,7 +49,7 @@ function App() {
           </Routes>
         </main>
       </React.Fragment>
-    </>
+    
   );
 }
 

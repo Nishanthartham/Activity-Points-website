@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store";
 import { useNavigate } from "react-router-dom";
+import { textAlign } from "@mui/system";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const Header = () => {
   };
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   return (
+    <div>
     <AppBar
       position="sticky"
       sx={{
@@ -49,12 +51,14 @@ const Header = () => {
           // className="APT_btn"
           style={{
             height: "7vh",
-            width: "12%",
+            borderColor: "#a16b15",
             borderRadius: "none",
             backgroundColor: "rgb(56, 85, 41)",
+            fontSize : '20px',
+            textAlign:"center"
           }}
           onClick={() => {
-            navigate("/dashboard");
+            navigate("/");
           }}
         >
           APT
@@ -113,6 +117,8 @@ const Header = () => {
         </Box>
       </Toolbar>
     </AppBar>
+    </div>
+    
   );
 };
 

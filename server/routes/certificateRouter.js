@@ -37,8 +37,8 @@ router.post("/internship", Auth, addInternship);
 router.get("/internship", Auth, getInternship);
 router.get("/internshipCount/", Auth, getInternshipCount);
 
-router.post("/eightweekcourse", addCourseEight);
-router.get("/eightweekcourse", getCourseEight);
+router.post("/eightweekcourse", Auth, addCourseEight);
+router.get("/eightweekcourse", Auth, getCourseEight);
 
 router.post("/tweleveWeekCourse", addCourseTweleve);
 router.get("/tweleveWeekCourse", getCourseTweleve);

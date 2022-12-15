@@ -22,11 +22,6 @@ import { useNavigate } from "react-router-dom";
 function createData(Activity, NoOfActivities, Points) {
   return { Activity, NoOfActivities, Points };
 }
-const styles = (theme) => ({
-  tablecell: {
-    fontSize: "40pt",
-  },
-});
 function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [rows, setRows] = useState([{}]);
@@ -122,13 +117,13 @@ function Dashboard() {
         </center>
         <br></br>
         <br></br>
-        <h1>
+        <h2>
           {" "}
           <center>
             {" "}
             Hello user {JSON.parse(localStorage.getItem("userId"))}
           </center>
-        </h1>
+        </h2>
         <br></br>
         <br></br>
         <TableContainer component={Paper}>
@@ -171,10 +166,12 @@ function Dashboard() {
                         <b>{row.NoOfActivities}</b>
                       </h5>
                     </TableCell>
-                    <TableCell align="center">
+                    <TableCell align="center" >
                       <h5>
                         <b>{row.Points}</b>
+                        
                       </h5>
+                     
                     </TableCell>
                   </TableRow>
                 </>
@@ -183,6 +180,8 @@ function Dashboard() {
           </Table>
         </TableContainer>
       </>
+
+    <center><h3>Total Activity Points are :  </h3></center>
     </div>
   );
 }

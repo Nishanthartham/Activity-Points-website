@@ -224,11 +224,13 @@ export const getInternshipCount = async (req, res) => {
 
 export const addCourseEight = async (req, res) => {
   try {
-    console.log("Adding course_eight certificate");
+    const username = req.id;
+    console.log("Adding course eight certificate");
     let present = await course_eight.findOne({ username: username });
-    console.log("asdfa" + present);
+    // console.log("asdfa" + present);
     if (present) {
       console.log("found");
+      const intern_data = present.name;
 
       const certificate = await course_eight.updateOne(
         {
@@ -237,7 +239,7 @@ export const addCourseEight = async (req, res) => {
         {
           $set: {
             username: username,
-            name: [...present.name, req.body.file],
+            name: [...intern_data, req.body.name],
           },
         },
         { new: true }
@@ -253,6 +255,7 @@ export const addCourseEight = async (req, res) => {
         name: [req.body.name],
         username: username,
       });
+      console.log("after create ");
       const certificate_data = await certificate.save();
       res.status(200).json(certificate_data);
       console.log("New user certificate created");
@@ -278,6 +281,31 @@ export const getCourseEight = async (req, res) => {
       console.log(" internship certificate not found");
       res.status(401).json({ message: "No user found" });
       console.log(" User has no hackathon certificates ");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
+
+export const getCourseEightCount = async (req, res) => {
+  try {
+    const username = req.id;
+    console.log("Getting eight week certifcate");
+    let present = await course_eight.findOne({ username: username });
+    console.log("req" + req.id);
+
+    // console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      const certificate_data = await course_eight.findOne({
+        username: username,
+      });
+      res.status(200).json(certificate_data.name.length);
+    } else {
+      console.log(" course eight certificate not found");
+      res.status(200).json(0);
+      console.log(" User has no course eight certificates ");
     }
   } catch (error) {
     res.status(401).json({ message: "Some error :(" });

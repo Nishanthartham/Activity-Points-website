@@ -5,15 +5,19 @@ import {
   addHackathon,
   getHackathon,
   getHackathonCount,
+  deleteHackathon,
 } from "../controllers/certificateController.js";
 import {
   addInternship,
   getInternship,
   getInternshipCount,
+  deleteInternship,
 } from "../controllers/certificateController.js";
 import {
   addCourseEight,
   getCourseEight,
+  getCourseEightCount,
+  deleteCourseEight,
 } from "../controllers/certificateController.js";
 import {
   addCourseTweleve,
@@ -28,15 +32,19 @@ router.post("/add8cred", addCertificate);
 console.log("Inside router");
 
 router.post("/hackathon", Auth, addHackathon);
+router.delete("/hackathon/:id", Auth, deleteHackathon);
 router.get("/hackathon/", Auth, getHackathon);
 router.get("/hackathonCount/", Auth, getHackathonCount);
 
 router.post("/internship", Auth, addInternship);
+router.delete('/internship/:id',Auth,deleteInternship);
 router.get("/internship", Auth, getInternship);
 router.get("/internshipCount/", Auth, getInternshipCount);
 
-router.post("/eightweekcourse", addCourseEight);
-router.get("/eightweekcourse", getCourseEight);
+router.post("/eightweekcourse", Auth, addCourseEight);
+router.get("/eightweekcourse", Auth, getCourseEight);
+router.delete('/eightweekcourse/:id',Auth,deleteCourseEight);
+router.get('/eightweekcourse/',Auth,getCourseEightCount);
 
 router.post("/tweleveWeekCourse", addCourseTweleve);
 router.get("/tweleveWeekCourse", getCourseTweleve);

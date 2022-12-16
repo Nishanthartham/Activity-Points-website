@@ -36,9 +36,9 @@ mongoose.connect(
   }
 );
 
-/*mongoose.connect(url, () => {
-  console.log("Database connected");
-});*/
+// mongoose.connect(url, () => {
+//   console.log("Database connected");
+// });
 
 // .then (()=>app.listen((PORT),()=>console.log(`App is running at ${PORT} port`)))
 // .catch((err)=>console.log(err.message))

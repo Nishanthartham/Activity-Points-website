@@ -457,3 +457,69 @@ export const getCourseTweleve = async (req, res) => {
     return;
   }
 };
+
+export const getCourseTwelveCount = async (req, res) => {
+  try {
+    const username = req.id;
+    console.log("Getting twelve week certifcate");
+    let present = await course_tweleve.findOne({ username: username });
+    console.log("req" + req.id);
+
+    // console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      const certificate_data = await course_tweleve.findOne({
+        username: username,
+      });
+      res.status(200).json(certificate_data.name.length);
+    } else {
+      console.log(" course twelve certificate not found");
+      res.status(200).json(0);
+      console.log(" User has no course twelve certificates ");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
+
+export const deleteCourseTwelve = async (req, res) => {
+  try {
+    const username = req.id;
+    console.log("deleting course_twelve certificate");
+    const index = JSON.parse(req.params.id);
+    let present = await course_eight.findOne({ username: username });
+    // console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      let hack_data = present.name;
+      hack_data.splice(index, 1);
+      console.log("found 22");
+      const certificate = await course_tweleve.updateOne(
+        {
+          username: username,
+        },
+        {
+          $set: {
+            username: username,
+            name: hack_data, //splice
+          },
+        },
+        { new: true }
+      );
+
+      console.log("saved in mongo");
+      const certificate_data = await course_tweleve.findOne({
+        username: username,
+      });
+      console.log("Certificate deleted successfully" + certificate_data);
+      res.status(200).json(certificate_data);
+      // console.log("Certificate Added" + certificate_data);
+    } else {
+      console.log("cant find record cant delete");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};

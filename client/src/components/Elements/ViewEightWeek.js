@@ -5,48 +5,79 @@ import { useNavigate } from "react-router-dom";
 
 function ViewEightWeek() {
   const [loading, setLoading] = useState(false);
-  const [subjects, setSubjects] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const [subjects, setSubjects] = useState({ _id: null, name: [] });
+  // const [userId, setUserId] = useState();
+  // const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
 
   console.log("outside effect");
-  useEffect(() => {
-    return () => {
-      console.log("Inside effect");
-      getSubjects();
-      console.log("Inside effect2");
-    };
-  }, []);
+  console.log(JSON.parse(localStorage.getItem("userId")));
 
-  // const goToDetails = (subjectId) => {
-  //   navigate(`/Details/${subjectId}`);
-  // };
-
+  const deleteSubject = async (subjectId, certificate_loc) => {
+    console.log("delete" + certificate_loc);
+    if (window.confirm(`Do you want to delete the selected certificate `)) {
+      try {
+        const deleted_data = await axios
+          .delete(
+            `http://localhost:5000/Certificate/eightweek/${certificate_loc}`,
+            {
+              headers: {
+                authorization: JSON.parse(localStorage.getItem("token")),
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+            getSubjects();
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   const getSubjects = async () => {
+    const userId = JSON.parse(localStorage.getItem("userId"));
+
     setLoading(true);
     try {
-      const subjects = await axios.get(
-        "http://localhost:5000/Certificate/eightweekcourse"
+      console.log("inside view hack " + localStorage.getItem("token"));
+      const hackData = await axios.get(
+        `http://localhost:5000/Certificate/eightweek/`,
+        {
+          headers: {
+            authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        }
       );
-      console.log("Subjects -> getSubjects -> subjects", subjects);
-      console.log(subjects.data);
-      setSubjects(subjects.data);
+      console.log("Subjects -> getSubjects -> subjects", hackData);
+      console.log(hackData.data);
+      setSubjects({
+        _id: hackData.data._id,
+        name: hackData.data.name,
+      });
       setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
     }
   };
+  useEffect(() => {
+    getSubjects();
+  }, []);
 
-  console.log(subjects);
   return (
     <>
+      {/* {console.log("from view" + userId)} */}
       <Fragment>
         <Boxes
           items={subjects}
+          id={subjects._id}
+          style={{ padding: "10px", margin: 2 }}
           loading={loading}
           logo="School"
-          thisCategory="Eight Week Course Certificates"
+          thisCategory="Eight Week Certificates"
+          delete={deleteSubject}
           // goToDetails={goToDetails}
         />
       </Fragment>

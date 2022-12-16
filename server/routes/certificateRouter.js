@@ -6,6 +6,8 @@ import {
   getHackathon,
   getHackathonCount,
   deleteHackathon,
+  deleteCourseTwelve,
+  getCourseTwelveCount,
 } from "../controllers/certificateController.js";
 import {
   addInternship,
@@ -22,6 +24,8 @@ import {
 import {
   addCourseTweleve,
   getCourseTweleve,
+  deleteCourseTwelve,
+  getCourseTwelveCount,
 } from "../controllers/certificateController.js";
 const router = express.Router();
 
@@ -46,7 +50,9 @@ router.get("/eightweekcourse", Auth, getCourseEight);
 router.delete('/eightweekcourse/:id',Auth,deleteCourseEight);
 router.get('/eightweekcourse/',Auth,getCourseEightCount);
 
-router.post("/tweleveWeekCourse", addCourseTweleve);
-router.get("/tweleveWeekCourse", getCourseTweleve);
+router.post("/tweleveWeekCourse",Auth, addCourseTweleve);
+router.get("/tweleveWeekCourse", Auth, getCourseTweleve);
+router.delete('/tweleveweekcourse/:id',Auth,deleteCourseTwelve);
+router.get('/tweleveweekcourse/',Auth,getCourseTwelveCount);
 
 export default router;

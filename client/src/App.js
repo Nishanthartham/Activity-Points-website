@@ -15,6 +15,8 @@ import UploadInternship from "./components/UploadCertificates/UploadInternship";
 import ViewInternship from "./components/Elements/ViewInternship";
 import ViewEightWeek from "./components/Elements/ViewEightWeek";
 import UploadEightWeek from "./components/UploadCertificates/UploadEightWeek";
+import ViewTwelveWeek from "./components/Elements/ViewTwelveWeek";
+import UploadTwelveWeek from "./components/UploadCertificates/UploadTwelveWeek";
 import Landing from "./components/Landing";
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
           <Route path="/viewhackathon" element={<ViewHackathon />} />
           <Route path="/viewinternship" element={<ViewInternship />} />
           <Route path="/vieweightweek" element={<ViewEightWeek />} />
+          <Route path="/viewtwelveweek" element={<ViewTwelveWeek />} />
+
 
             <Route path="/viewtypes" element={<ViewCertificate />} />
             <Route path="/uploadtypes" element={<UploadCertificate />} />
@@ -44,6 +48,7 @@ function App() {
             <Route path="/uploadhackathon" element={<UploadHackathon />} />
             <Route path="/uploadinternship" element={<UploadInternship />} />
             <Route path="/uploadeightweek" element={<UploadEightWeek />} />
+            <Route path ="/uploadtwelveweek" element={<UploadTwelveWeek/>}/>
 
             {/* <Route path="/internship" element={<Internship />} /> */}
           </Routes>

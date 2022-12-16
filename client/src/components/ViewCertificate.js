@@ -49,7 +49,7 @@ function ViewCertificate() {
           </div>
         </div>
         <div className="level2">
-          <div className="child" style={myStyle} >12-week courses</div>
+          <div className="child" style={myStyle} onClick={() => navigate("/viewtwelveweek")}>12-week courses</div>
           <div className="child" style={myStyle} >CR</div>
           <div className="child" style={myStyle} >Sports</div>
         </div>

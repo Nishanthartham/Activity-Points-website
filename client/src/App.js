@@ -13,8 +13,11 @@ import UploadCertificate from "./components/UploadCertificate";
 import UploadHackathon from "./components/UploadCertificates/UploadHackathon";
 import UploadInternship from "./components/UploadCertificates/UploadInternship";
 import ViewInternship from "./components/Elements/ViewInternship";
+import ViewCR from "./components/Elements/ViewCR";
+import ViewResearch from "./components/Elements/ViewResearch";
 import ViewEightWeek from "./components/Elements/ViewEightWeek";
 import UploadEightWeek from "./components/UploadCertificates/UploadEightWeek";
+
 import Landing from "./components/Landing";
 
 function App() {
@@ -36,6 +39,8 @@ function App() {
           <Route path="/viewhackathon" element={<ViewHackathon />} />
           <Route path="/viewinternship" element={<ViewInternship />} />
           <Route path="/vieweightweek" element={<ViewEightWeek />} />
+          <Route path="/Viewcr" element={<ViewCR />} />
+          <Route path="/Viewresearch" element={<ViewResearch />} />
 
             <Route path="/viewtypes" element={<ViewCertificate />} />
             <Route path="/uploadtypes" element={<UploadCertificate />} />

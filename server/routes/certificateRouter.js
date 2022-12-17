@@ -22,6 +22,8 @@ import {
 import {
   addCourseTweleve,
   getCourseTweleve,
+  deleteCourseTwelve,
+  getCourseTwelveCount,
 } from "../controllers/certificateController.js";
 import {
   addCR,
@@ -57,19 +59,21 @@ router.get("/internshipCount/", Auth, getInternshipCount);
 router.post("/eightweekcourse", Auth, addCourseEight);
 router.get("/eightweekcourse", Auth, getCourseEight);
 router.delete("/eightweekcourse/:id", Auth, deleteCourseEight);
-router.get("/eightweekcourse/", Auth, getCourseEightCount);
+router.get("/eightweekcourseCount/", Auth, getCourseEightCount);
 
-router.post("/tweleveWeekCourse", addCourseTweleve);
-router.get("/tweleveWeekCourse", getCourseTweleve);
+router.post("/twelveWeekCourse", Auth, addCourseTweleve);
+router.get("/twelveWeekCourse", Auth, getCourseTweleve);
+router.delete("/twelveweekcourse/:id", Auth, deleteCourseTwelve);
+router.get("/twelveweekCourseCount/", Auth, getCourseTwelveCount);
 
 router.post("/CR", Auth, addCR);
 router.get("/CR", Auth, getCR);
 router.delete("/CR/:id", Auth, deleteCR);
-router.get("/CR/", Auth, getCRCount);
+router.get("/CRCount/", Auth, getCRCount);
 
 router.post("/Research", Auth, addResearch);
 router.get("/Research", Auth, getResearch);
 router.delete("/Research/:id", Auth, deleteResearch);
-router.get("/Research/", Auth, getResearchCount);
+router.get("/ResearchCount/", Auth, getResearchCount);
 
 export default router;

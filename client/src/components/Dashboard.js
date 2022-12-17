@@ -25,8 +25,9 @@ function createData(Activity, NoOfActivities, Points) {
 function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [rows, setRows] = useState([{}]);
+  const [totPoints, setTotPoints] = useState(0);
   const navigate = useNavigate();
-
+  var points = 0;
   const userId = JSON.parse(localStorage.getItem("userId"));
   const getHackathon = async () => {
     // setLoading(true);
@@ -41,7 +42,12 @@ function Dashboard() {
         .then((res) => {
           console.log("Subjects -> getSubjects -> subjects", res);
           console.log(res.data);
-          setRows([...rows, createData("Hackathon", res.data, res.data * 4)]);
+          setRows([...rows, createData("Hackathon", res.data, res.data * 3)]);
+          // var temp = totPoints + res.data * 3;
+          // setTotPoints(temp);
+          points = points + res.data * 3;
+          console.log(points);
+          // console.log(totPoints + res.data * 3);
           // rows.push(createData("Hackathon", res.data, res.data * 4));
           setLoading(false);
           getInternship();
@@ -68,12 +74,151 @@ function Dashboard() {
           console.log("before" + JSON.stringify(rows));
           setRows((rows) => [
             ...rows,
-            createData("Internship", res.data, res.data * 4),
+            createData("Internship", res.data, res.data * 20),
           ]);
+          // setTotPoints(totPoints + res.data * 20);
+          points = points + res.data * 20;
+          console.log(points);
           // setRows([...rows, createData("Internship", res.data, res.data * 4)]);
           // rows.push(createData("Hackathon", res.data, res.data * 4));
           console.log("from internship" + JSON.stringify(rows));
           // setLoading(false);
+          getEightWeek();
+        });
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+  const getEightWeek = async () => {
+    // setLoading(true);
+    console.log(userId + "async");
+    try {
+      const subjects = await axios
+        .get(`http://localhost:5000/Certificate/eightweekcourseCount/`, {
+          headers: {
+            authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        })
+        .then((res) => {
+          // res = JSON.parse(res);
+          console.log("Subjects -> getSubjects -> subjects", res);
+          console.log(res.data);
+          console.log("before" + JSON.stringify(rows));
+          setRows((rows) => [
+            ...rows,
+            createData("Eight Week Courses", res.data, res.data * 16),
+          ]);
+          // setTotPoints(totPoints + res.data * 16);
+          points = points + res.data * 16;
+          console.log(points);
+          // setRows([...rows, createData("Internship", res.data, res.data * 4)]);
+          // rows.push(createData("Hackathon", res.data, res.data * 4));
+          console.log("from Eight week" + JSON.stringify(rows));
+          getTwelveWeek();
+          // setLoading(false);
+        });
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+  const getTwelveWeek = async () => {
+    // setLoading(true);
+    console.log(userId + "async");
+    try {
+      const subjects = await axios
+        .get(`http://localhost:5000/Certificate/twelveweekCourseCount/`, {
+          headers: {
+            authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        })
+        .then((res) => {
+          // res = JSON.parse(res);
+          console.log("Subjects -> getSubjects -> subjects", res);
+          console.log(res.data);
+          console.log("before" + JSON.stringify(rows));
+          setRows((rows) => [
+            ...rows,
+            createData("Twelve Week course", res.data, res.data * 20),
+          ]);
+          // setTotPoints(totPoints + res.data * 20);
+          points = points + res.data * 20;
+          console.log(points);
+          // setRows([...rows, createData("Internship", res.data, res.data * 4)]);
+          // rows.push(createData("Hackathon", res.data, res.data * 4));
+          console.log("from Twelve Week" + JSON.stringify(rows));
+          getCR();
+          // setLoading(false);
+        });
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+  const getCR = async () => {
+    // setLoading(true);
+    console.log(userId + "async");
+    try {
+      const subjects = await axios
+        .get(`http://localhost:5000/Certificate/CRCount/`, {
+          headers: {
+            authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        })
+        .then((res) => {
+          // res = JSON.parse(res);
+          console.log("Subjects -> getSubjects -> subjects", res);
+          console.log(res.data);
+          console.log("before" + JSON.stringify(rows));
+          setRows((rows) => [
+            ...rows,
+            createData("CR", res.data, res.data * 5),
+          ]);
+          // setTotPoints(totPoints + res.data * 5);
+          // console.log("tot points" + totPoints);
+          points = points + res.data * 5;
+          console.log(points);
+          // setRows([...rows, createData("Internship", res.data, res.data * 4)]);
+          // rows.push(createData("Hackathon", res.data, res.data * 4));
+          console.log("from CR" + JSON.stringify(rows));
+          getResearch();
+          // setLoading(false);
+        });
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+  const getResearch = async () => {
+    // setLoading(true);
+    console.log(userId + "async");
+    try {
+      const subjects = await axios
+        .get(`http://localhost:5000/Certificate/ResearchCount/`, {
+          headers: {
+            authorization: JSON.parse(localStorage.getItem("token")),
+          },
+        })
+        .then((res) => {
+          // res = JSON.parse(res);
+          console.log("Subjects -> getSubjects -> subjects", res);
+          console.log(res.data);
+          console.log("before" + JSON.stringify(rows));
+          setRows((rows) => [
+            ...rows,
+            createData("Research Publications", res.data, res.data * 10),
+          ]);
+          // setTotPoints(totPoints + res.data * 10);
+          // console.log("tot points" + totPoints);
+          points = points + res.data * 10;
+          console.log(points);
+
+          // setRows([...rows, createData("Internship", res.data, res.data * 4)]);
+          // rows.push(createData("Hackathon", res.data, res.data * 4));
+          console.log("from research" + JSON.stringify(rows));
+          // setLoading(false);
+          setTotPoints(points);
         });
     } catch (error) {
       console.error(error);
@@ -166,12 +311,10 @@ function Dashboard() {
                         <b>{row.NoOfActivities}</b>
                       </h5>
                     </TableCell>
-                    <TableCell align="center" >
+                    <TableCell align="center">
                       <h5>
                         <b>{row.Points}</b>
-                        
                       </h5>
-                     
                     </TableCell>
                   </TableRow>
                 </>
@@ -181,7 +324,9 @@ function Dashboard() {
         </TableContainer>
       </>
 
-    <center><h3>Total Activity Points are :  </h3></center>
+      <center>
+        <h3>Total Activity Points are : {totPoints}</h3>
+      </center>
     </div>
   );
 }

@@ -61,14 +61,26 @@ function UploadCertificate() {
           </div>
         </div>
         <div className="level2">
-          <div className="child" style={myStyle}>
+          <div
+            className="child"
+            style={myStyle}
+            onClick={() => navigate("/uploadtwelveweek")}
+          >
             12-week courses
           </div>
-          <div className="child" style={myStyle}>
+          <div
+            className="child"
+            style={myStyle}
+            onClick={() => navigate("/uploadcr")}
+          >
             CR
           </div>
-          <div className="child" style={myStyle}>
-            Sports
+          <div
+            className="child"
+            style={myStyle}
+            onClick={() => navigate("/uploadresearch")}
+          >
+            Research Activity
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import axios from "axios";
 import Boxes from "../Boxes/Boxes";
 import { useNavigate } from "react-router-dom";
 
-function ViewEightWeek() {
+function ViewTwelveWeek() {
   const [loading, setLoading] = useState(false);
   const [subjects, setSubjects] = useState({ _id: null, name: [] });
   // const [userId, setUserId] = useState();
@@ -19,7 +19,7 @@ function ViewEightWeek() {
       try {
         const deleted_data = await axios
           .delete(
-            `http://localhost:5000/Certificate/eightweekcourse/${certificate_loc}`,
+            `http://localhost:5000/Certificate/twelveWeekCourse/${certificate_loc}`,
             {
               headers: {
                 authorization: JSON.parse(localStorage.getItem("token")),
@@ -43,7 +43,7 @@ function ViewEightWeek() {
     try {
       console.log("inside view hack " + localStorage.getItem("token"));
       const hackData = await axios.get(
-        `http://localhost:5000/Certificate/eightweekcourse/`,
+        `http://localhost:5000/Certificate/twelveWeekCourse/`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),
@@ -76,7 +76,7 @@ function ViewEightWeek() {
           style={{ padding: "10px", margin: 2 }}
           loading={loading}
           logo="School"
-          thisCategory="Eight Week Certificates"
+          thisCategory="Twelve Week Certificates"
           delete={deleteSubject}
           // goToDetails={goToDetails}
         />
@@ -85,4 +85,4 @@ function ViewEightWeek() {
   );
 }
 
-export default ViewEightWeek;
+export default ViewTwelveWeek;

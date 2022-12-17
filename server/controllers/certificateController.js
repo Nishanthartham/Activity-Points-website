@@ -8,9 +8,8 @@ import { Research } from "../models/hackathonSchema.js";
 import bcrypt from "bcryptjs";
 import jwt, { decode } from "jsonwebtoken";
 
-// const username = "fsd"; //fetch from localstorage
-// const username = localStorage.getItem("userId");
-// console.log(username);
+//Hackathon
+
 export const addHackathon = async (req, res) => {
   try {
     const username = req.id;
@@ -139,6 +138,8 @@ export const deleteHackathon = async (req, res) => {
   }
 };
 
+//Internship
+
 export const addInternship = async (req, res) => {
   try {
     const username = req.id;
@@ -224,6 +225,48 @@ export const getInternshipCount = async (req, res) => {
   }
 };
 
+export const deleteInternship = async (req, res) => {
+  try {
+    const username = req.id;
+    console.log("deleting internship certificate");
+    const index = JSON.parse(req.params.id);
+    let present = await Internship.findOne({ username: username });
+    // console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      let hack_data = present.name;
+      hack_data.splice(index, 1);
+      const certificate = await Internship.updateOne(
+        {
+          username: username,
+        },
+        {
+          $set: {
+            username: username,
+            name: hack_data, //splice
+          },
+        },
+        { new: true }
+      );
+
+      console.log("saved in mongo");
+      const certificate_data = await Internship.findOne({
+        username: username,
+      });
+      console.log("Certificate deleted successfully" + certificate_data);
+      res.status(200).json(certificate_data);
+      // console.log("Certificate Added" + certificate_data);
+    } else {
+      console.log("cant find record cant delete");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
+
+//Course Eight
+
 export const addCourseEight = async (req, res) => {
   try {
     const username = req.id;
@@ -270,19 +313,19 @@ export const addCourseEight = async (req, res) => {
 
 export const getCourseEight = async (req, res) => {
   try {
-    console.log("Getting course eight certifcate");
-    let present = await course_eight.findOne({ username: username });
+    console.log("Getting eight course certifcate");
+    let present = await course_eight.findOne({ username: req.id });
     console.log("asdfa" + present);
     if (present) {
-      console.log("found");
+      console.log("found hackathon project");
       const certificate_data = await course_eight.findOne({
-        username: username,
+        username: req.id,
       });
       res.status(200).json(certificate_data);
     } else {
-      console.log(" internship certificate not found");
+      console.log("certificate not found");
       res.status(401).json({ message: "No user found" });
-      console.log(" User has no hackathon certificates ");
+      console.log(" User has no eight course certificates ");
     }
   } catch (error) {
     res.status(401).json({ message: "Some error :(" });
@@ -315,14 +358,79 @@ export const getCourseEightCount = async (req, res) => {
   }
 };
 
-export const addCourseTweleve = async (req, res) => {
+export const deleteCourseEight = async (req, res) => {
   try {
-    console.log("Adding certificate");
-    let present = await course_tweleve.findOne({ username: username });
-    console.log("asdfa" + present);
+    const username = req.id;
+    console.log("deleting course Eight certificate");
+    const index = JSON.parse(req.params.id);
+    let present = await course_eight.findOne({ username: username });
+    // console.log("asdfa" + present);
     if (present) {
       console.log("found");
+      let hack_data = present.name;
+      hack_data.splice(index, 1);
+      const certificate = await course_eight.updateOne(
+        {
+          username: username,
+        },
+        {
+          $set: {
+            username: username,
+            name: hack_data, //splice
+          },
+        },
+        { new: true }
+      );
 
+      console.log("saved in mongo");
+      const certificate_data = await course_eight.findOne({
+        username: username,
+      });
+      console.log("Certificate deleted successfully" + certificate_data);
+      res.status(200).json(certificate_data);
+      // console.log("Certificate Added" + certificate_data);
+    } else {
+      console.log("cant find record cant delete");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
+
+//Course tweleve
+
+export const getCourseTweleve = async (req, res) => {
+  try {
+    console.log("Getting tweleve certifcate");
+    let present = await course_tweleve.findOne({ username: req.id });
+    console.log("asdfa" + present);
+    if (present) {
+      console.log("found eight week project");
+      const certificate_data = await course_tweleve.findOne({
+        username: req.id,
+      });
+      res.status(200).json(certificate_data);
+    } else {
+      console.log("certificate not found");
+      res.status(401).json({ message: "No user found" });
+      console.log(" User has no eight course certificates ");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
+
+export const addCourseTweleve = async (req, res) => {
+  try {
+    const username = req.id;
+    console.log("Adding course_tweleve certificate");
+    let present = await course_tweleve.findOne({ username: username });
+    // console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      const hack_data = present.name;
       const certificate = await course_tweleve.updateOne(
         {
           username: username,
@@ -330,16 +438,19 @@ export const addCourseTweleve = async (req, res) => {
         {
           $set: {
             username: username,
-            name: [...present.name, req.body.file],
+            name: [...hack_data, req.body.name],
           },
         },
         { new: true }
       );
+
+      console.log("saved in mongo");
       const certificate_data = await course_tweleve.findOne({
         username: username,
       });
+      console.log("Certificate Added" + certificate_data);
       res.status(200).json(certificate_data);
-      console.log("Certificate Added");
+      // console.log("Certificate Added" + certificate_data);
     } else {
       console.log("not found inserting newly");
       const certificate = await course_tweleve.create({
@@ -356,21 +467,65 @@ export const addCourseTweleve = async (req, res) => {
   }
 };
 
-export const getCourseTweleve = async (req, res) => {
+export const getCourseTwelveCount = async (req, res) => {
   try {
-    console.log("Getting course eight certifcate");
+    const username = req.id;
+    console.log("Getting twelve week certifcate");
     let present = await course_tweleve.findOne({ username: username });
-    console.log("asdfa" + present);
+    console.log("req" + req.id);
+
+    // console.log("asdfa" + present);
     if (present) {
       console.log("found");
       const certificate_data = await course_tweleve.findOne({
         username: username,
       });
-      res.status(200).json(certificate_data);
+      res.status(200).json(certificate_data.name.length);
     } else {
-      console.log(" 12 -week  certificate not found");
-      res.status(401).json({ message: "No user found" });
-      console.log(" User has no 12 -week certificates ");
+      console.log(" course twelve certificate not found");
+      res.status(200).json(0);
+      console.log(" User has no course twelve certificates ");
+    }
+  } catch (error) {
+    res.status(401).json({ message: "Some error :(" });
+    return;
+  }
+};
+
+export const deleteCourseTwelve = async (req, res) => {
+  try {
+    const username = req.id;
+    console.log("deleting course_twelve certificate");
+    const index = JSON.parse(req.params.id);
+    let present = await course_tweleve.findOne({ username: username });
+    // console.log("asdfa" + present);
+    if (present) {
+      console.log("found");
+      let hack_data = present.name;
+      hack_data.splice(index, 1);
+      console.log("found 22");
+      const certificate = await course_tweleve.updateOne(
+        {
+          username: username,
+        },
+        {
+          $set: {
+            username: username,
+            name: hack_data, //splice
+          },
+        },
+        { new: true }
+      );
+
+      console.log("saved in mongo");
+      const certificate_data = await course_tweleve.findOne({
+        username: username,
+      });
+      console.log("Certificate deleted successfully" + certificate_data);
+      res.status(200).json(certificate_data);
+      // console.log("Certificate Added" + certificate_data);
+    } else {
+      console.log("cant find record cant delete");
     }
   } catch (error) {
     res.status(401).json({ message: "Some error :(" });
@@ -605,30 +760,14 @@ export const deleteResearch = async (req, res) => {
     // console.log("asdfa" + present);
     if (present) {
       console.log("found");
-      let hack_data = present.name;
-      hack_data.splice(index, 1);
-      const certificate = await Research.updateOne(
-        {
-          username: username,
-        },
-        {
-          $set: {
-            username: username,
-            name: hack_data, //splice
-          },
-        },
-        { new: true }
-      );
-
-      console.log("saved in mongo");
-      const certificate_data = await Research.findOne({
+      const certificate_data = await course_tweleve.findOne({
         username: username,
       });
-      console.log("Certificate deleted successfully" + certificate_data);
       res.status(200).json(certificate_data);
-      // console.log("Certificate Added" + certificate_data);
     } else {
-      console.log("cant find record cant delete");
+      console.log("certificate not found");
+      res.status(401).json({ message: "No user found" });
+      console.log(" User has no Research certificates ");
     }
   } catch (error) {
     res.status(401).json({ message: "Some error :(" });

@@ -41,6 +41,20 @@ function Box(props) {
                   alt="Image"
                   className="certi-image"
                 />
+                <div>
+                  <center>
+                  {" "}
+                  <br></br>
+                  <Button
+                  color ="primary"
+                  style={{"color":"white","backgroundColor":"#8b181b","fontSize":"12px"}}
+                    background-color="#8b181b"
+                    onClick={props.delete}
+                  >
+                    Delete
+                  </Button>
+                  </center>
+                </div>
 
                 {/* <a href={"data:image/png;base64," + img}>hack link</a> */}
               </div>
@@ -62,16 +76,7 @@ function Box(props) {
                 <EditIcon />
               </IconButton>
             </div> */}
-                <div>
-                  {" "}
-                  <IconButton
-                    aria-label="delete"
-                    color="secondary"
-                    onClick={props.delete}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </div>
+                
               </div>
             </div>
           </div>

@@ -18,14 +18,11 @@ function ViewCR() {
     if (window.confirm(`Do you want to delete the selected certificate `)) {
       try {
         const deleted_data = await axios
-          .delete(
-            `http://localhost:5000/Certificate/cr/${certificate_loc}`,
-            {
-              headers: {
-                authorization: JSON.parse(localStorage.getItem("token")),
-              },
-            }
-          )
+          .delete(`http://localhost:5000/Certificate/CR/${certificate_loc}`, {
+            headers: {
+              authorization: JSON.parse(localStorage.getItem("token")),
+            },
+          })
           .then((res) => {
             console.log(res);
             console.log(res.data);
